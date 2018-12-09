@@ -17,7 +17,7 @@ int main()
     string str_line;
     string str_Numb;
 
-    myfile.open("Euler_Files/Problem81(test).txt");
+    myfile.open("Matrix_test.txt");
     matrix.clear();
     if (myfile.is_open())
     {

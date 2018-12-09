@@ -40,7 +40,7 @@ template <typename ForwardIterator> size_t prime_sieve(ForwardIterator start, Fo
 
 bool rotator(int prime, vector <int> primes)
 {
-	
+
 }
 
 int main()
@@ -74,7 +74,7 @@ int main()
 	
 	for (vector<int>::iterator i = primes.begin(); i != primes.end(); ++i)
 	{
-		if (true)
+		if (rotator())
 		{	
 			cout << "pan prime: " << *i << endl;
 			panPrimes++;
