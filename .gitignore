@@ -1,0 +1,8 @@
+#Ignore everything
+*
+
+#Won't ignore these files
+.gitignore
+!*.cpp
+!*.txt
+!*.py
