@@ -86,7 +86,7 @@ bool left(int Prime, vector<int> primes)
 int main()
 {
     char release;
-    vector <int> primes(10000000);
+    vector <int> primes(1000000);
 
 	size_t count = prime_sieve(primes.begin(), primes.end());
 
@@ -108,12 +108,20 @@ int main()
 		}
 	}
 	int sum = 0;
-
+	int numb = 0;
+	cout << "starting the sum\n";
 	for (mark = primes.begin(); mark != primes.end(); ++mark)
 	{
 		if ((left(*mark, primes) && right(*mark, primes)) == true)
 		{
+			numb ++;
+			cout << numb << ": " << *mark;
 			sum += *mark;
+			
+		}
+		if (numb == 11)
+		{
+			break;
 		}
 	}
 
