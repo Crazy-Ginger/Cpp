@@ -42,8 +42,18 @@ int main()
     char release;
     vector <int> primes(1000000);
 
-    
+    vector<int>::iterator mark;
+	for (mark = primes.begin(); mark != primes.end(); ++mark)
+	{
+		if (*mark == 1)
+		{
+			primes.erase(mark, primes.end());
+			break;
+		}
+	}
 
+
+	
     cin >> release;
     return 0;
 }
