@@ -36,23 +36,57 @@ template <typename ForwardIterator> size_t prime_sieve(ForwardIterator start, Fo
 	return out_it - start;
 	}
 
+bool isPrime(int prime, vector<int> primes)
+{
+	for (vector<int>::iterator i = primes.begin(); i != primes.end(); ++i)
+	{
+		if (*i == prime)
+		{
+			return true;
+		}
+		else if(*i > prime)
+		{
+			return false;
+		}
+	}
+	return false;
+}
 bool right(int Prime, vector<int> primes)
 {
 	auto str_Prime = to_string(Prime);
-	
+	for (int i = 1; i <= str_Prime.length(); i ++)
+	{
+		int temp = stoi(str_Prime.substr(0,i), nullptr, 10);
+		
+		if (!isPrime(temp, primes))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 
 bool left(int Prime, vector<int> primes)
 {
 	auto str_Prime = to_string(Prime);
+	for (int i = 1; i <= str_Prime.length(); i ++)
+	{
+		int temp = stoi(str_Prime.substr(0,i), nullptr, 10);
+		
+		if (!isPrime(temp, primes))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 
 int main()
 {
     char release;
-    vector <int> primes(10000);
+    vector <int> primes(10000000);
 
 	size_t count = prime_sieve(primes.begin(), primes.end());
 
