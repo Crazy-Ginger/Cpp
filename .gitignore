@@ -11,3 +11,6 @@
 !*.cpp
 !*.txt
 !*.py
+
+#Ignores Testing
+Testing.cpp
