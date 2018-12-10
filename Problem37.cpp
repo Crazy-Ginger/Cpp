@@ -56,7 +56,7 @@ bool right(int Prime, vector<int> primes)
 	auto str_Prime = to_string(Prime);
 	for (int i = 1; i <= str_Prime.length(); i ++)
 	{
-		int temp = stoi(str_Prime.substr(0,i), nullptr, 10);
+		int temp = stoi(str_Prime.substr(str_Prime.length() - i), nullptr, 10);
 		
 		if (!isPrime(temp, primes))
 		{
