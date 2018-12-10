@@ -74,7 +74,7 @@ int main()
 	
 	for (vector<int>::iterator i = primes.begin(); i != primes.end(); ++i)
 	{
-		if (rotator())
+		if (rotator(*i, primes))
 		{	
 			cout << "pan prime: " << *i << endl;
 			panPrimes++;
