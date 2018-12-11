@@ -35,8 +35,24 @@ template <typename ForwardIterator> size_t prime_sieve(ForwardIterator start, Fo
 	return out_it - start;
 	}
 
+
+int algorithm(int a, int b, vector<int> primes)
+{
+	int n = 0;
+	while (n*n + a*n + b = primes.at(n))
+	{
+		cout << n << ", ";
+		n ++;
+	}
+	cout << endl;
+	return n;
+}
+
+
 int main()
 {
+	char release;
+	int coeficients, longest = 0, temp;
 	vector <int> primes(10000000);
 	size_t count = prime_sieve(primes.begin(), primes.end());
 
@@ -44,7 +60,15 @@ int main()
 	{
 		for (int j = -1000; j < 10000; j++)
 		{
-			
+			temp = algorithm(i, j, primes);
+			if (temp > longest)
+			{
+				longest = temp;
+				coeficients = i * j;
+			}
 		}
 	}
+	cout << "Answer: " << coeficients << endl;
+	cout << "At: " << longest << endl;
+	cin >> release;
 }
