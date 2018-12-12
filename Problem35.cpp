@@ -1,7 +1,5 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
-#include <time.h>
 #include <string>
 using namespace std;
 
@@ -38,28 +36,24 @@ template <typename ForwardIterator> size_t prime_sieve(ForwardIterator start, Fo
 	return out_it - start;
 	}
 
+
 bool rotator(int prime, vector <int> primes)
 {
-
+	auto str_Prime =to_string(prime);
+	
 }
+
 
 int main()
 {
 	char release;
-	int panPrimes = 1;
+	int panPrimes = 0;
 
 	vector <int> primes(1000000);
 
-
-	clock_t clock_start, clock_end;
-	clock_start = clock();
 	
 	//returns the number of primes found as well as editting the ++
 	size_t count = prime_sieve(primes.begin(), primes.end());
-	
-	//calculates time to mark all the primes
-	clock_end = clock();
-	float diff ((float)clock_end-(float)clock_start), seconds = diff/CLOCKS_PER_SEC;
 	
 	//removes the elements of the vector that doesn't contain primes
 	vector<int>::iterator mark;
