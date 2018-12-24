@@ -18,6 +18,7 @@ int main()
 	string str_line, str_numb;
 	int int_temp;
 
+	//Gets the triangle file and creates a vector that contains it
 	if (file.is_open())
 	{
 		while (getline(file, str_line))
@@ -49,32 +50,35 @@ int main()
 
 	vector <vector<int>> summed(triangle);
 
-	for (int i = 0; i < triangle.size(); i++) //outputs the entire matrix in a formatted fashion
+	//displays the triangle to check that it has been correctly copied from the txt file
+	cout << "Triangle:\n";
+	for (int i = 0; i < triangle.size(); i++) 
     {
         for (int j = 0; j < triangle[i].size(); j++)
         {
             cout << triangle[i][j] << ", ";
-			summed[i][j] = 1000;
         }
         cout << endl;
     }
 	
-	for (int y = 0; y < summed.size()-1; y++)	//tries to find the sum of all the possible paths
+
+	//tries to find the sum of all the possible paths
+	for (int y = 0; y < summed.size()-1; y++)	
     {
         for (int x = 0; x < summed[y].size()-1; x++)
         {
-			if (summed[y+1][x] > summed[y][x]+triangle[y+1][x])
+			if (summed[y+1][x] < summed[y][x]+triangle[y+1][x])
 			{
 				summed[y+1][x] = summed[y][x] + triangle[y+1][x];
 			}
 			summed[y+1][x+1] = summed[y][x] + triangle[y+1][x+1];
-			cout << summed[y][x] + triangle[y+1][x] << "\t" << summed[y][x] + triangle[y+1][x+1] << endl;
         }
-        cout << endl;
     }
 
+
+	//outputs summed for checking
 	cout << "\nSummed: \n";
-	for (int i = 0; i < summed.size(); i++) //outputs summed
+	for (int i = 0; i < summed.size(); i++) 
     {
         for (int j = 0; j < summed[i].size(); j++)
         {
@@ -84,29 +88,32 @@ int main()
         cout << endl;
     }
 	
-	for (int y = 0; y < summed.size()-1; y++)	//finding the smallest value at the bottom of summed
+	//finding the largest value at the bottom of summed
+	for (int y = 0; y < summed.size()-1; y++)	
     {
         for (int x = 0; x < summed[y].size()-1; x++)
         {
-			if (summed[y+1][x] > summed[y][x]+triangle[y+1][x])
+			if (summed[y+1][x] < summed[y][x]+triangle[y+1][x])
 			{
 				summed[y+1][x] = summed[y][x] + triangle[y+1][x];
 			}
 			summed[y+1][x+1] = summed[y][x] + triangle[y+1][x+1];
         }
-        cout << endl;
     }
 
-	cout << "Finding the smallest\n";
-	int_temp = 483646;
-	for (int i = 0; i > summed[summed.size()].size(); i++)
-	{
-		cout << summed.at(summed.size()-1).at(i) << endl;
-		/* if (summed[summed.size()-1][i] < int_temp)
-		{
-			int_temp = summed[summed.size()-1][i];
-		} */
-	}
+	int_temp = 0;
+	for (int i = 0; i < summed.size(); i++) 
+    {
+        for (int j = 0; j < summed[i].size(); j++)
+        {
+            //cout << summed[i][j] << ", ";
+			if (summed[i][j] < int_temp)
+			{
+				int_temp = summed[i][j];
+			}
+        }
+    }
+	cout << "\n\n";
 	cout << int_temp << " Done\n";
 	cin >> release;
 	return 0;
