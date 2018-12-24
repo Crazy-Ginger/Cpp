@@ -2,7 +2,7 @@
 #include <random>   //new random
 #include <time.h>   //used for sleeping the console
 #include <windows.h>    //used to change the colour highlighting of the console
-
+//the usual stuff
 #include <iostream>
 #include <fstream>
 #include <string>
