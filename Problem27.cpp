@@ -35,10 +35,25 @@ template <typename ForwardIterator> size_t prime_sieve(ForwardIterator start, Fo
 	return out_it - start;
 	}
 
-
+//returns the number of consecutive primes
 int algorithm(int a, int b, vector<int> primes)
 {
-	
+	vector<int>::iterator pointer = primes.begin();
+	for (vector<int>::iterator checker = primes.begin(); checker != primes.end(); checker++)
+	{
+		if (*checker = b)
+		{
+			pointer = checker;
+			break;
+		}
+	}
+
+	int length = 0;
+	int n = 0;
+	while (true)
+	{
+		
+	}
 }
 
 
