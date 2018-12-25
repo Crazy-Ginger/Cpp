@@ -38,37 +38,32 @@ template <typename ForwardIterator> size_t prime_sieve(ForwardIterator start, Fo
 
 int algorithm(int a, int b, vector<int> primes)
 {
-	int n = 0;
-	while (n*n + a*n + b = primes.at(n))
-	{
-		cout << n << ", ";
-		n ++;
-	}
-	cout << endl;
-	return n;
+	
 }
 
 
 int main()
 {
 	char release;
-	int coeficients, longest = 0, temp;
+	int coefficienta, coefficientb;
+	int longest = 0, temp_int;
 	vector <int> primes(10000000);
 	size_t count = prime_sieve(primes.begin(), primes.end());
 
-	for (int i = -1000; i < 1000; i ++)
+	for (int a = -1000; a < 1000; a ++)
 	{
-		for (int j = -1000; j < 10000; j++)
+		for (vector<int>::iterator b = primes.begin(); *b < 1000; b++)
 		{
-			temp = algorithm(i, j, primes);
-			if (temp > longest)
+			temp = algorithm(a, *b, primes);
+			if (temp_int > longest)
 			{
-				longest = temp;
-				coeficients = i * j;
+				coefficienta = a;
+				coefficientb = *b;
+				longest = temp_int;
 			}
 		}
 	}
-	cout << "Answer: " << coeficients << endl;
-	cout << "At: " << longest << endl;
+	cout << "Answers: " << coefficienta << ", " << coefficientb << "\tTherefore the product is: " << coefficientb*coefficienta <<  endl;
+	cout << "With length: " << longest << endl;
 	cin >> release;
 }
