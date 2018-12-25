@@ -52,8 +52,10 @@ int algorithm(int a, int b, vector<int> primes)
 	int n = 0;
 	while (true)
 	{
-		
+		if (/*insert useful code here that will check if primes are found*/)
+		n++;
 	}
+	return length;
 }
 
 
