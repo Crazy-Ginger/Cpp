@@ -40,8 +40,10 @@ size_t prime_sieve(ForwardIterator start, ForwardIterator end)
 	return out_it - start;
 }
 
-void primeSieve(vector<int>::iterator &start, vector<int>::iterator &end)
+vector<int> primeSieve(vector <int> initial)
 {
+	vector<int>::iterator start = initial.begin();
+	vector<int>::iterator end = initial.end();
 	if (start == end)
 	{
 		cout << "No numbers\n";
@@ -77,6 +79,7 @@ void primeSieve(vector<int>::iterator &start, vector<int>::iterator &end)
 			}
 		}
 	}
+	return initial;
 }
 
 int main()
@@ -91,7 +94,9 @@ int main()
 	clock_t clock_start_old, clock_end_old, clock_start_new, clock_end_new;
 	clock_start_old = clock();
 
-	size_t count = prime_sieve(primes.begin(), primes.end());
+	//there seems to be no noticeable difference between using a function and template (tested using 10,000,000)
+	//size_t count = prime_sieve(primes.begin(), primes.end());	//uses the tried and tested template
+	primes = primeSieve(primes);	//trying to use a function to find the primes instead of a templates
 
 	//calculates time to mark all the primes
 	clock_end_old = clock();
@@ -118,7 +123,7 @@ int main()
 	}
 
 	cout << "Clock count: " << diff << "\tTime taken: " << seconds << endl;
-	cout << "Number of primes: " << count << endl;
+	//cout << "Number of primes: " << count << endl;
 
 	//to escape the program
 	cin >> release;
