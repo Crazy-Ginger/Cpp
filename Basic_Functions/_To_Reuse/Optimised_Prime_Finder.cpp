@@ -79,6 +79,16 @@ vector<int> primeSieve(vector <int> initial)
 			}
 		}
 	}
+	//removes the elements of the vector that doesn't contain primes
+	vector<int>::iterator mark;
+	for (mark = initial.begin(); mark != initial.end(); ++mark)
+	{
+		if (*mark == 1)
+		{
+			initial.erase(mark, initial.end());
+			break;
+		}
+	}
 	return initial;
 }
 
@@ -102,7 +112,7 @@ int main()
 	clock_end_old = clock();
 	float diff((float)clock_end_old - (float)clock_start_old), seconds = diff / CLOCKS_PER_SEC;
 
-	//removes the elements of the vector that doesn't contain primes
+	/* //removes the elements of the vector that doesn't contain primes (not neccessary when using the function as this is built in)
 	vector<int>::iterator mark;
 	for (mark = primes.begin(); mark != primes.end(); ++mark)
 	{
@@ -111,7 +121,7 @@ int main()
 			primes.erase(mark, primes.end());
 			break;
 		}
-	}
+	} */
 
 	//display the primes
 	if (choice < 1000000)
