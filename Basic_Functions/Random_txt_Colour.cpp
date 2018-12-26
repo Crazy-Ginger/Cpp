@@ -25,7 +25,7 @@ int main()
     fstream myfile;
     vector <string> words;
     string word;
-    myfile.open("C:\\Coding\\Word_list_smaller.txt");
+    myfile.open("C:\\Coding\\words.txt");
 
     if (!myfile.is_open())
     {
