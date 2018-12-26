@@ -52,8 +52,14 @@ int algorithm(int a, int b, vector<int> primes)
 	int n = 0;
 	while (true)
 	{
-		if (/*insert useful code here that will check if primes are found*/)
+		int next = (n*n + a*n + b);
+		if (*pointer != next)
+		{
+			return length;
+		}
 		n++;
+		length++;
+		pointer++;
 	}
 	return length;
 }
@@ -63,20 +69,26 @@ int main()
 {
 	char release;
 	int coefficienta, coefficientb;
-	int longest = 0, temp_int;
+	int longest = 0, length;
 	vector <int> primes(10000000);
 	size_t count = prime_sieve(primes.begin(), primes.end());
 
 	for (int a = -1000; a < 1000; a ++)
 	{
+		cout << "a: " << a << endl;
 		for (vector<int>::iterator b = primes.begin(); *b < 1000; b++)
 		{
-			temp = algorithm(a, *b, primes);
-			if (temp_int > longest)
+			/* cout << "\tb: " << *b << endl; */
+			length = algorithm(a, *b, primes);
+			/* if (length > 35)
+			{
+				cout << "length: " << length << "a & b: " << a << " " << *b << endl;
+			} */
+			if (length > longest)
 			{
 				coefficienta = a;
 				coefficientb = *b;
-				longest = temp_int;
+				longest = length;
 			}
 		}
 	}
