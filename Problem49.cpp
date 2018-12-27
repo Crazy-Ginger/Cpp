@@ -4,14 +4,14 @@
 using namespace std;
 
 //finds all the primes and fills a vector with them
-vector<int> primeSieve(vector <int> initial)
+vector<int> primeSieve(vector<int> initial)
 {
 	vector<int>::iterator start = initial.begin();
 	vector<int>::iterator end = initial.end();
 	if (start == end)
 	{
 		cout << "No numbers\n";
-        return vector<int> empty();
+		return vector<int> empty();
 	}
 	else
 	{
@@ -45,7 +45,7 @@ vector<int> primeSieve(vector <int> initial)
 		}
 	}
 
-    //removes the elements of the vector that doesn't contain primes
+	//removes the elements of the vector that doesn't contain primes
 	vector<int>::iterator mark;
 	for (mark = initial.begin(); mark != initial.end(); ++mark)
 	{
@@ -80,8 +80,9 @@ void appender(string word, vector<int> &pointers)
 	{
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
+	//needs to search through a bool for the primes and detect when the current prime has 2 other permutations then output those
 	cout << newOrder << endl;
-}
+}	
 
 //generates the permutations of pointers and which can be passed to other functions
 void Permuter(string word)
@@ -99,8 +100,7 @@ void Permuter(string word)
 
 	//variable declarations mainly for swapping the values in the array around and for counting the number of permutations
 	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
-	
-	
+
 	cout << "Count: " << count << "\t";
 	appender(word, pointers);
 
@@ -144,17 +144,31 @@ void Permuter(string word)
 		//print(list,length);
 		//cout << endl;
 
-		cout << "Count: " << count << "\t";
+		//cout << "Count: " << count << "\t";
 
 		appender(word, pointers);
 
-	}  //ensures the do keeps going and only check at the end if it's the last permutation
+	} //ensures the do keeps going and only check at the end if it's the last permutation
 
-	cout << "\nPermuted!" << endl;
+	//cout << "\nPermuted!" << endl;
 }
-
 
 int main()
 {
-    
+	vector<int> primes_int(10000);
+	primes_int = primeSieve(primes_int);
+
+	//creates a more searchable vector for the primes
+	vector<bool> prime_bool(10001);
+	fill(prime_bool.begin(), prime_bool.end(), false);
+	//marks all the primes in the bool vector which means that looking them up can be done much faster
+	for (vector<int>::iterator mark = primes_int.begin(); mark != primes_int.end(); mark++)
+	{
+		prime_bool.at(*mark) = true;
+	}
+
+	for (vector<int>::iterator pointer = primes_int.begin(); pointer != primes_int(); pointer++)
+	{
+		Permuter(to_string(*pointer));
+	}
 }
