@@ -11,7 +11,7 @@ vector<int> primeSieve(vector<int> initial)
 	if (start == end)
 	{
 		cout << "No numbers\n";
-		return vector<int> empty();
+		return vector<int>(0);
 	}
 	else
 	{
@@ -72,37 +72,60 @@ int factorial(int numb)
 }
 
 //allows for the permutations to be recommbined using the pointers
-void appender(string word, vector<int> &pointers)
+bool appender(string word, vector<int> &pointers, vector<bool> primeCheck)
 {
 
 	string newOrder = "";
+	int checker;
 	for (int i = 0; i < pointers.size(); i++)
 	{
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
 	//needs to search through a bool for the primes and detect when the current prime has 2 other permutations then output those
-	cout << newOrder << endl;
-}	
+	checker = stoi(newOrder);
+	bool toPrint = false;
+	if (checker == 1487 || checker == 4817 || checker == 8147)
+	{
+		toPrint = true;
+	}
+	if (primeCheck.at(checker))
+	{
+		if (toPrint)
+		{
+			cout << "Found " << checker << "and it outputted: " << true;
+		}
+		return true;
+	}
+	else
+	{
+		if (toPrint)
+		{
+			cout << "Found " << checker << "and it outputted: " << false;
+		}
+		return false;
+	}
+}
 
 //generates the permutations of pointers and which can be passed to other functions
-void Permuter(string word)
+void Permuter(string word, vector<bool> primeCheck)
 {
 	vector<int> pointers;
 	int length = word.size();
 
+	int toOutput = 0;
 	//fills the array defined above
 	for (int i = 0; i < length + 1; i++)
 	{
 		pointers.push_back(i);
 		//cout << "i: " << i << "\tlist[" << i << "]: " << pointers.at(i) << endl;
 	}
-	cout << "filled vector\n";
+	//cout << "filled vector\n";
 
 	//variable declarations mainly for swapping the values in the array around and for counting the number of permutations
 	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
 
-	cout << "Count: " << count << "\t";
-	appender(word, pointers);
+	//cout << "Count: " << count << "\t";
+	//appender(word, pointers, primeCheck);
 
 	for (count++; count <= factorial(length); ++count)
 	{
@@ -146,29 +169,36 @@ void Permuter(string word)
 
 		//cout << "Count: " << count << "\t";
 
-		appender(word, pointers);
+		if (appender(word, pointers, primeCheck))
+		{
+			toOutput++;
+		}
 
 	} //ensures the do keeps going and only check at the end if it's the last permutation
-
+	if (toOutput == 3)
+	{
+		cout << word << endl;
+	}
 	//cout << "\nPermuted!" << endl;
 }
 
 int main()
 {
-	vector<int> primes_int(10000);
-	primes_int = primeSieve(primes_int);
+	char release;
+	vector<int> primes(10000);
+	primes = primeSieve(primes);
 
 	//creates a more searchable vector for the primes
-	vector<bool> prime_bool(10001);
-	fill(prime_bool.begin(), prime_bool.end(), false);
+	vector<bool> primeCheck(10001);
+	fill(primeCheck.begin(), primeCheck.end(), false);
 	//marks all the primes in the bool vector which means that looking them up can be done much faster
-	for (vector<int>::iterator mark = primes_int.begin(); mark != primes_int.end(); mark++)
+	for (vector<int>::iterator mark = primes.begin(); mark != primes.end(); mark++)
 	{
-		prime_bool.at(*mark) = true;
+		primeCheck.at(*mark) = true;
 	}
-
-	for (vector<int>::iterator pointer = primes_int.begin(); pointer != primes_int(); pointer++)
+	for (vector<int>::iterator pointer = primes.begin(); pointer != primes.end(); pointer++)
 	{
-		Permuter(to_string(*pointer));
+		Permuter(to_string(*pointer), primeCheck);
 	}
+	cin >> release;
 }
