@@ -79,7 +79,7 @@ int main()
 
 	vector <int> primes(100);
 	primes = primeSieve(primes);
-	
+
 
 	
 	//returns the number of primes found as well as editting the ++
