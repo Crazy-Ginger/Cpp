@@ -112,6 +112,17 @@ int main()
 	clock_end_old = clock();
 	float diff((float)clock_end_old - (float)clock_start_old), seconds = diff / CLOCKS_PER_SEC;
 
+
+	//creates a more searchable vector for the primes
+	vector<bool> primeCheck(choice + 1);
+	fill(primeCheck.begin(), primeCheck.end(), false);
+	//marks all the primes in the bool vector which means that looking them up can be done much faster
+	for (vector<int>::iterator mark = primes.begin(); mark != primes.end(); mark++)
+	{
+		primeCheck.at(*mark) = true;
+	}
+
+
 	/* //removes the elements of the vector that doesn't contain primes (not neccessary when using the function as this is built in)
 	vector<int>::iterator mark;
 	for (mark = primes.begin(); mark != primes.end(); ++mark)
