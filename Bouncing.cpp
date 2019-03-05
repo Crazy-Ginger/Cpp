@@ -1,10 +1,31 @@
 #include <iostream>
 #include <vector>
+
+//for sleeping across platforms
+#include <chrono>
+#include <thread>
 using namespace std;
 
 class particle
 {
-	
+	private:
+		int currentx = 1, currenty = 1;
+		int prevx, prevy;
+		int gridw, gridh;
+
+		bool boundCheck()
+		{
+
+		}
+	public:
+		void setGrid(int x, int y)
+		{
+			gridw = x;
+			gridh = y;
+			currentx = (x/2);
+			currenty = (y/2);
+
+		}
 };
 
 class table
@@ -16,6 +37,7 @@ class table
 
 	void set_grid()
 	{
+
 		vector <char> row;
 		for (int y = 0; y <= dimy; y++)
 		{
@@ -67,16 +89,20 @@ class table
 
 int main()
 {
-	table current;
+	table grid;
+	particle bouncer;
 	int x , y;
 
 	cout << "Width: ";
 	cin >> x;
 	cout << "Height: ";
 	cin >> y;
-	cout << endl;
-	current.set_dim(x, y);
-	current.display();
+
+	
+	
+ 	grid.set_dim(x, y);
+	bouncer.setGrid(x, y);
+	grid.display();
 
 	return 0;
 }

@@ -135,18 +135,18 @@ int main()
 	} */
 
 	//display the primes
-	if (choice < 1000000)
-	{
+/* 	if (choice < 1000000)
+	{ */
 		for (size_t i = 0; i < primes.size(); ++i)
 		{
 			cout << "i: " << i << "\t prime: " << primes[i] << endl;
 		}
-	}
+/* 	} */
 
 	cout << "Clock count: " << diff << "\tTime taken: " << seconds << endl;
 	//cout << "Number of primes: " << count << endl;
 
 	//to escape the program
-	cin >> release;
+	//cin >> release;
 	return 0;
 }
