@@ -4,6 +4,8 @@
 #include <time.h>
 using namespace std;
 
+
+/*
 template <typename ForwardIterator>
 size_t prime_sieve(ForwardIterator start, ForwardIterator end)
 {
@@ -38,7 +40,7 @@ size_t prime_sieve(ForwardIterator start, ForwardIterator end)
 		}
 	}
 	return out_it - start;
-}
+}*/
 
 vector<int> primeSieve(vector <int> initial)
 {
@@ -89,6 +91,13 @@ vector<int> primeSieve(vector <int> initial)
 			break;
 		}
 	}
+
+	//checks for an error that allows 0 to be the last element in the array of vectors
+	if (*(--initial.end()) == 0)
+	{
+		initial.erase(--initial.end());
+	}
+
 	return initial;
 }
 
@@ -96,7 +105,6 @@ int main()
 {
 	char release;
 	double choice;
-	//long long sum = 0; used to find the sum (no longer necessary)
 
 	cin >> choice;
 	vector<int> primes(choice);
@@ -105,15 +113,15 @@ int main()
 	clock_start_old = clock();
 
 	//there seems to be no noticeable difference between using a function and template (tested using 10,000,000)
-	//size_t count = prime_sieve(primes.begin(), primes.end());	//uses the tried and tested template
-	primes = primeSieve(primes);	//trying to use a function to find the primes instead of a templates
+	//size_t count = prime_sieve(primes.begin(), primes.end());	//uses the tried and tested template, this returns an integer and accesses the values using pointers
+	primes = primeSieve(primes);	//using the function as there is no noticeable time difference and it returns a vector rather than an integer
 
 	//calculates time to mark all the primes
 	clock_end_old = clock();
 	float diff((float)clock_end_old - (float)clock_start_old), seconds = diff / CLOCKS_PER_SEC;
 
 
-	//creates a more searchable vector for the primes
+	//creates a searchable vector for the primes
 	vector<bool> primeCheck(choice + 1);
 	fill(primeCheck.begin(), primeCheck.end(), false);
 	//marks all the primes in the bool vector which means that looking them up can be done much faster
@@ -135,16 +143,13 @@ int main()
 	} */
 
 	//display the primes
-/* 	if (choice < 1000000)
-	{ */
-		for (size_t i = 0; i < primes.size(); ++i)
-		{
-			cout << "i: " << i << "\t prime: " << primes[i] << endl;
-		}
-/* 	} */
+	for (size_t i = 0; i < primes.size(); ++i)
+	{
+		cout << "i: " << i << "\t prime: " << primes[i] << endl;
+	}
 
 	cout << "Clock count: " << diff << "\tTime taken: " << seconds << endl;
-	//cout << "Number of primes: " << count << endl;
+	cout << "Number of primes: " << primes.size() << endl;
 
 	//to escape the program
 	//cin >> release;
