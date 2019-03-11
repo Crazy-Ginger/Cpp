@@ -59,7 +59,7 @@ vector<vector<int>> MatrixGet(string codepath)
 int main()
 {
     char release;
-    vector <vector<int>> matrix = MatrixGet("Matrix_test.txt");
+    vector <vector<int>> matrix = MatrixGet("matrixTest.txt");
     cout << "\nPrinting matrix\n";
 
     for (int i = 0; i < matrix.size(); i++)
