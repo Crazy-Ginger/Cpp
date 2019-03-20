@@ -40,7 +40,7 @@ void Permuter(string word)
 		pointers.push_back(i);
 		//cout << "i: " << i << "\tlist[" << i << "]: " << pointers.at(i) << endl;
 	}
-	cout << "filled vector\n";
+	//cout << "filled vector\n";
 
 	//variable declarations mainly for swapping the values in the array around and for counting the number of permutations
 	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
@@ -95,7 +95,7 @@ void Permuter(string word)
 
 	}  //ensures the do keeps going and only check at the end if it's the last permutation
 
-	cout << "\nPermuted!" << endl;
+	//cout << "\nPermuted!" << endl;
 }
 
 int main()
@@ -106,7 +106,6 @@ int main()
 
 	Permuter(word);
 
-	cout << "done" << endl;
-	cin >> release;
+	//cin >> release;
 	return 0;
 }
