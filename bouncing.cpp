@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+#include <time.h>
 //for sleeping across platforms
 #include <chrono>
 #include <thread>
@@ -34,6 +34,21 @@ class particle
             currentx = (x/2);
             currenty = (y/2);
 
+        }
+
+        void setVel(int x, int y)
+        {
+            velx = x;
+            vely = y;
+        }
+        
+        int retCurrentX()
+        {
+            return currentx;
+        }
+        int retCurrentY()
+        {
+            return currenty;
         }
         
 };
@@ -77,7 +92,7 @@ class table
         {
             for (int y = 0; y <= dimy; y++)
             {
-                cout << y << " ";
+                cout << y << "\t";
                 for (int x = 0; x <= dimx; x++)
                 {
                     cout << grid.at(y).at(x) << " ";
@@ -109,7 +124,12 @@ int main()
 
     grid.set_dim(x, y);
     bouncer.setGrid(x, y);
+    //clock_t clockEnd, clockStart = clock();
     grid.display();
+    //clockEnd = clock();
+
+    //float tickDiff ((float)clockEnd - (float)clockStart), clockDiff = tickDiff / CLOCKS_PER_SEC;
+    //cout << "ticks: " << tickDiff << "\tseconds: " << clockDiff << endl;
 
     return 0;
 }

@@ -109,17 +109,16 @@ int main()
 	cin >> choice;
 	vector<int> primes(choice);
 
-	clock_t clock_start_old, clock_end_old, clock_start_new, clock_end_new;
-	clock_start_old = clock();
+	clock_t clock_start, clock_end;
+	clock_start = clock();
 
 	//there seems to be no noticeable difference between using a function and template (tested using 10,000,000)
 	//size_t count = prime_sieve(primes.begin(), primes.end());	//uses the tried and tested template, this returns an integer and accesses the values using pointers
 	primes = primeSieve(primes);	//using the function as there is no noticeable time difference and it returns a vector rather than an integer
 
 	//calculates time to mark all the primes
-	clock_end_old = clock();
-	float diff((float)clock_end_old - (float)clock_start_old), seconds = diff / CLOCKS_PER_SEC;
-
+	clock_end = clock();
+	float tickDiff((float)clock_end - (float)clock_start), clockDiff = tickDiff / CLOCKS_PER_SEC;
 
 	//creates a searchable vector for the primes
 	vector<bool> primeCheck(choice + 1);
@@ -148,7 +147,7 @@ int main()
 		cout << "i: " << i << "\t prime: " << primes[i] << endl;
 	}
 
-	cout << "Clock count: " << diff << "\tTime taken: " << seconds << endl;
+	cout << "Clock count: " << tickDiff << "\tTime taken: " << clockDiff << endl;
 	cout << "Number of primes: " << primes.size() << endl;
 
 	//to escape the program
