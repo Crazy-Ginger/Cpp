@@ -90,12 +90,21 @@ class table
     public:
         void display()
         {
+            ballx = retCurrentX;
+            bally = retCurrentY;
             for (int y = 0; y <= dimy; y++)
             {
                 cout << y << "\t";
                 for (int x = 0; x <= dimx; x++)
                 {
-                    cout << grid.at(y).at(x) << " ";
+                    if (x == ballx && y == bally)
+                    {
+                        cout << "# ";
+                    }
+                    else
+                    {
+                        cout << grid.at(y).at(x) << " ";
+                    }
                 }
                 cout << endl;
             }
