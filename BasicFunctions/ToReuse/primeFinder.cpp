@@ -23,7 +23,7 @@ vector<int> primeSieve(vector <int> initial)
             if (*prime_it == 1)
                 continue;
             //determine the prime number represented by this iterator location
-            size_t stride = (prime_it - start) + 1;
+            int stride = (prime_it - start) + 1;
             //mark all multiples of this prime number up to max
             vector<int>::iterator mark_it = prime_it;
             while ((end - mark_it) > stride)
