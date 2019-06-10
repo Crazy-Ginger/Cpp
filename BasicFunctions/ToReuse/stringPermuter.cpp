@@ -12,7 +12,7 @@ int factorial(int numb)
 	}
 	else
 	{
-		1;
+	    return	1;
 	}
 }
 
@@ -21,7 +21,7 @@ void appender(string word, vector<int> &pointers)
 {
 
 	string newOrder = "";
-	for (int i = 0; i < pointers.size(); i++)
+	for (unsigned int i = 0; i < pointers.size(); i++)
 	{
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
@@ -52,13 +52,14 @@ void Permuter(string word)
 	for (count++; count <= factorial(length); ++count)
 	{
 		initial_comp = length - 2;
-		for (initial_comp; initial_comp >= 0; initial_comp--)
+		while (initial_comp >= 0)
 		{
 			//cout << "list[initial_comp]" << list[initial_comp] << endl;
 			if (pointers.at(initial_comp) < pointers.at(initial_comp + 1))
 			{
 				break;
 			}
+            initial_comp--;
 		}
 		rearrange = initial_comp + 1;
 		asc_swapper = length - 1;
