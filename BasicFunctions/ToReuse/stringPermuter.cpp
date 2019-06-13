@@ -100,7 +100,7 @@ void Permuter(string word)
 
 int main()
 {
-	char release;
+	//char release;
 	string word;
 	getline(cin, word);
 
