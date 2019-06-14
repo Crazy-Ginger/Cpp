@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
+#include <algorithm>
 using namespace std;
 
 //used to allow for the length of permutations to be calculated
@@ -104,7 +106,19 @@ vector<string> Permuter(string word)
 vector<string> listGet()
 {
     vector <string> words;
-    
+    ifstream wordList;
+    wordList.open("wordList.txt");
+    if (!wordList)
+    {
+        cerr << "Unable to open wordList\n";
+    }
+    string temp;
+    while(wordList >> temp)
+    {
+        transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
+        words.push_back(temp);
+    }
+    wordList.close();
     return words;
 }
 
