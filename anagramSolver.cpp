@@ -21,7 +21,6 @@ int factorial(int numb)
 //allows for the permutations to be recommbined using the pointers
 string appender(string word, vector<int> &pointers)
 {
-
 	string newOrder = "";
 	for (unsigned int i = 0; i < pointers.size(); i++)
 	{
@@ -127,9 +126,29 @@ int main()
 	//char release;
 	string word;
 	getline(cin, word);
+    word = transform(word.begin(), word.end(), word.begin(), ::tolower);
 
 	vector <string> anagrams = Permuter(word);
-
+    vector <string> dictionary = listGet();
+    
+    for (vector<string>::iterator i = dictionary.begin(); i != dictionary.end(); ++i)
+    {
+        if (*i.length() != word.length())
+        {
+            dictionary.erase(i);
+        }
+    }
+    
+    for (vector<string>::iterator i=anagrams.begin(); i!=anagrams.end(); ++i)
+    {
+        for (vector<string>::iterator j=dictionary.begin(); j!=dictionary.end(); ++j)
+        {
+            if (*i == *j)
+            {
+                cout << *i << endl;
+            }
+        }
+    }
 	//cin >> release;
 	return 0;
 }
