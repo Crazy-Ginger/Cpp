@@ -48,7 +48,7 @@ vector<string> Permuter(string word)
 	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
 	
 	
-	cout << "Count: " << count << "\t";
+    //cout << "Count: " << count << "\t";
 	anagrams.push_back(appender(word, pointers));
 
 	for (count++; count <= factorial(length); ++count)
@@ -92,7 +92,7 @@ vector<string> Permuter(string word)
 		//print(list,length);
 		//cout << endl;
 
-		cout << "Count: " << count << "\t";
+		//cout << "Count: " << count << "\t";
 
 		anagrams.push_back(appender(word, pointers));
 
@@ -102,7 +102,7 @@ vector<string> Permuter(string word)
     return anagrams;
 }
 
-vector<string> listGet()
+vector<string> listGet(int length)
 {
     vector <string> words;
     ifstream wordList;
@@ -114,8 +114,11 @@ vector<string> listGet()
     string temp;
     while(wordList >> temp)
     {
-        transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
-        words.push_back(temp);
+        if (temp.length() == length)
+        {
+            transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
+            words.push_back(temp);
+        }
     }
     wordList.close();
     return words;
@@ -126,19 +129,15 @@ int main()
 	//char release;
 	string word;
 	getline(cin, word);
-    word = transform(word.begin(), word.end(), word.begin(), ::tolower);
+    transform(word.begin(), word.end(), word.begin(), ::tolower);
+    cout << "Transformed word\n";
 
 	vector <string> anagrams = Permuter(word);
-    vector <string> dictionary = listGet();
+    cout << "Permuted input\n";
+    vector <string> dictionary = listGet(word.length());
+    cout << "Obtained dictionary\n";
     
-    for (vector<string>::iterator i = dictionary.begin(); i != dictionary.end(); ++i)
-    {
-        if (*i.length() != word.length())
-        {
-            dictionary.erase(i);
-        }
-    }
-    
+    cout << "\nSolutions:\n";
     for (vector<string>::iterator i=anagrams.begin(); i!=anagrams.end(); ++i)
     {
         for (vector<string>::iterator j=dictionary.begin(); j!=dictionary.end(); ++j)
