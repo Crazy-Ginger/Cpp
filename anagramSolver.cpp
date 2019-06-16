@@ -102,7 +102,7 @@ vector<string> Permuter(string word)
     return anagrams;
 }
 
-vector<string> listGet(int length)
+vector<string> listGet(unsigned int length)
 {
     vector <string> words;
     ifstream wordList;
