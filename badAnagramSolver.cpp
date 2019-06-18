@@ -130,7 +130,6 @@ int main()
 	string word;
 	getline(cin, word);
     transform(word.begin(), word.end(), word.begin(), ::tolower);
-    cout << "Transformed word\n";
 
 	vector <string> anagrams = Permuter(word);
     cout << "Permuted input\n";
