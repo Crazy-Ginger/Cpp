@@ -30,7 +30,7 @@ int main()
 	cout << endl;
 	for (int i = 0; i < row; i++) 
 		{
-		for (int j = 0; j < vec[i].size(); j++)
+		for (unsigned int j = 0; j < vec[i].size(); j++)
 			{
 			cout << vec[i][j] << "\t";
 			}

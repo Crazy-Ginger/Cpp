@@ -5,9 +5,10 @@
 #include <algorithm>
 using namespace std;
 
-vector<string> listGet(unsigned int length)
+vector <vector<string>> listGet(unsigned int length)
 {
-    vector <string> words;
+    char release;
+    vector <vector<string>> words;
     ifstream wordList;
     wordList.open("wordList.txt");
     if (!wordList)
@@ -15,12 +16,24 @@ vector<string> listGet(unsigned int length)
         cerr << "Unable to open wordList\n";
     }
     string parser;
+    vector <string> adder;
     while (wordList >> parser)
     {
         if (parser.length() <= length)
         {
             transform(parser.begin(), parser.end(), parser.begin(), ::tolower);
-            words.push_back(parser);
+            //cout << parser << "\t";
+            adder.push_back(parser);
+            sort(parser.begin(), parser.end());
+            //cout << parser << endl;
+            adder.push_back(parser);
+            words.push_back(adder);
+            
+            //clear the variables
+            adder.clear();
+            parser.clear();
+
+            //cin >> release;
         }
     }
     wordList.close();
@@ -37,6 +50,18 @@ int main()
     
     sort(word.begin(), word.end());
     cout << "Sorted: " << word << endl;
-    vector <string> dictionary = listGet(word.length());
+    vector <vector <string>> dictionary = listGet(word.length());
+    cout << "Got distionary\n\n";
+
+
+    for (unsigned int i = 0; i < dictionary.size(); i++)
+    {
+        //cout << "Words: "; 
+        for (unsigned int j = 0; j < dictionary.at(i).size(); j++)
+        {
+            cout << dictionary[i][j] << "\t";
+        }
+        cout << endl;
+    }
 
 }
