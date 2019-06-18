@@ -40,6 +40,12 @@ vector <vector<string>> listGet(unsigned int length)
     return words;
 }
 
+vector <string> oneCharLess(string word)
+{
+    vector <string> words;
+    for (int i = 0; i < word.length(); i++)
+    {
+        words.push_back(word.substr(Lq
 
 int main()
 {
