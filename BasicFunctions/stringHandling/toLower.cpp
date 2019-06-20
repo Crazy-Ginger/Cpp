@@ -27,7 +27,7 @@ int main()
     for (unsigned int i = 0; i < words.size(); i++)
     {
         cout << words.at(i) << endl;
-        newList << words.at(i) << endl;
+        newList << words.at(i) << "\n";
     }
     newList.close();
     return 0;
