@@ -5,6 +5,15 @@
 #include <algorithm>
 using namespace std;
 
+struct lenCompare 
+{
+    bool operator () (const string& first, const string& second)
+    {
+        return first.size() > second.size();
+    }
+};
+
+
 vector <vector<string>> listGet(unsigned int length)
 {
     vector <vector<string>> words;
@@ -39,10 +48,10 @@ vector <vector<string>> listGet(unsigned int length)
     return words;
 }
 
-vector <string> charless(string word, vector<string> anagrams)
+vector <string> charless(string word )
 {
-    char release;
-    cout << "\nCharless called again, word length: " << word.length() << endl;
+    //char release;
+    //cout << "\nCharless called again, word length: " << word.length() << endl;
     vector <string> words;
     string temp = word;
     //cout << "New less: " << word << endl;
@@ -53,38 +62,85 @@ vector <string> charless(string word, vector<string> anagrams)
         words.push_back(temp);
         if (temp.length() > 1)
         {
-            vector <string> newana = charless(temp, newana);
-            words.insert(words.end(), anagrams.begin(), anagrams.end());
-            words.insert(words.end(), newana.begin(), newana.end());
+            vector <string> deeper = charless(temp);
+            words.insert(words.end(), deeper.begin(), deeper.end());
         }
         else
         {
-            words.insert(words.end(), anagrams.begin(), anagrams.end());
+            words.push_back(temp);
         }
-        cout << temp << endl;
+        //cout << temp << endl;
         temp = word;
     }
-    cin >> release;
+    //cin >> release;
     return words;
 }
 
 int main()
 {
+    cout << "Word: ";
     string word;
-    char release;
+    //char release;
     getline(cin, word);
     transform(word.begin(), word.end(), word.begin(), ::tolower);
-    cout << "Word: " << word << endl;
+    cout <<  endl;
     
     sort(word.begin(), word.end());
     cout << "Sorted: " << word << endl;
     vector <vector <string>> dictionary = listGet(word.length());
-    cout << "Got distionary: " << dictionary.size() << "\n\n";
-    cin >> release;
+    cout << "Got dictionary: " << dictionary.size() << "\n";
 
     //charless(word);
-    vector <string> anagrams;
-    anagrams = charless(word, anagrams); 
-    
+    vector <string> fullanagrams = charless(word); 
+    vector <string> redAnagrams;
+    redAnagrams.push_back(word);
+    bool add = true;
+    string adder;
 
+
+    cout << "fullAnagrams: " << fullanagrams.size() << endl;
+    for (vector<string>::iterator i=fullanagrams.begin(); i!=fullanagrams.end(); i++)
+    {
+        add = true;
+        adder = *i;
+        for (vector<string>::iterator j=redAnagrams.begin(); j!=redAnagrams.end(); j++)
+        {
+            if (*i == *j)
+            {
+                add = false;
+                break;
+            }
+        }
+        if (add)
+        {
+            //cout << "Added: " << adder << endl;
+            redAnagrams.push_back(adder);
+        }
+    }
+
+    cout << "reduced Anagrams: " << redAnagrams.size() << endl;
+    //for (vector<string>::iterator i=redAnagrams.begin(); i!=redAnagrams.end(); i++)
+    //{
+        //cout << *i << endl;
+    //}
+    vector<string> solutions;
+    cout << "\nSolutions: \n";
+    
+    for (vector<string>::iterator i=redAnagrams.begin(); i!=redAnagrams.end(); i++)
+    {
+        for (unsigned int j = 0; j< dictionary.size(); j++)
+        {
+            if (*i == dictionary.at(j).at(1))
+            {
+                solutions.push_back(dictionary.at(j).at(0));
+            }
+        }
+    }
+    
+    lenCompare comp;
+    sort(solutions.begin(), solutions.end(), comp);
+    for (vector<string>::iterator i = solutions.begin(); i!=solutions.end(); i++)
+    {
+        cout << *i << endl;
+    }
 }
