@@ -67,7 +67,7 @@ int factorial(int numb)
 	}
 	else
 	{
-		1;
+		return 1;
 	}
 }
 
@@ -77,7 +77,7 @@ bool appender(string word, vector<int> &pointers, vector<bool> primeCheck)
 
 	string newOrder = "";
 	int checker;
-	for (int i = 0; i < pointers.size(); i++)
+	for (unsigned int i = 0; i < pointers.size(); i++)
 	{
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
