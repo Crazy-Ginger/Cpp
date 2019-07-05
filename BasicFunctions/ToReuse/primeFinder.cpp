@@ -66,7 +66,6 @@ vector<int> primeSieve(vector <int> initial)
 
 int main()
 {
-    char release;
     double choice;
 
     cin >> choice;
@@ -92,15 +91,18 @@ int main()
         primeCheck.at(*mark) = true;
     }
 
-
-    //display the primes
-    /*for (size_t i = 0; i < primes.size(); ++i)
+    while (true)
     {
-        cout << "i: " << i << "\t prime: " << primes[i] << endl;
-    }*/
+        cin >> choice;
+        cout << primeCheck.at((int)choice) << endl;
+    }
+    //display the primes
+    //for (size_t i = 0; i < primes.size(); ++i)
+    //{
+        //cout << "i: " << i << "\t prime: " << primes[i] << endl;
+    //}
 
     cout << "Clock count: " << tickDiff << "\tTime taken: " << clockDiff << endl;
     cout << "Number of primes: " << primes.size() << endl;
-
     return 0;
 }

@@ -98,6 +98,7 @@ void Permuter(string word)
 	//cout << "\nPermuted!" << endl;
 }
 
+
 int main()
 {
 	//char release;
