@@ -51,7 +51,7 @@ vector<int> Permuter(string word)
 	for (count++; count <= factorial(length); ++count)
 	{
 		initial_comp = length - 2;
-		for (initial_comp; initial_comp != 0; initial_comp--)
+		for (initial_comp; initial_comp >= 0; initial_comp--)
 		{
 			//cout << "list[initial_comp]" << list[initial_comp] << endl;
 			if (pointers.at(initial_comp) < pointers.at(initial_comp + 1))

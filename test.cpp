@@ -3,36 +3,89 @@
 #include <vector>
 using namespace std;
 
-void output(string word, vector<int> &pointers)
+unsigned int fact(int numb)
 {
-    string newOrder = "";
-    for (unsigned int i = 0; i < pointers.size(); i++)
+    if (numb >1)
     {
-        newOrder.append(word.substr(pointers.at(i), 1));
+        return numb * fact(numb-1);
     }
-    cout << newOrder << endl;
+    else
+    {
+        return 1;
+    }
 }
-
+void printer(string word, vector<int> pointers)
+{
+    string newWord = "";
+    for (vector<int>::iterator i = pointers.begin(); i != pointers.end(); i++)
+    {
+        newWord.append(word.substr(*i, 1));
+    }
+    cout << newWord << endl;
+}
 
 int main()
 {
-    string word =  "wordthis";
+    string word;
+    getline(cin, word);
     vector <int> pointers;
-    int length = word.size();
-
-    for (int i = 0; i < length; i++)
+    unsigned int length = word.size();
+    
+    for (unsigned int i = 0; i < length; i++)
     {
         pointers.push_back(i);
-        cout << i << "\t" << word.substr(i, 1) << endl;
+        cout << i;
     }
     cout << endl;
-    output(word, pointers);    
-    for (int i = 1; i < length; i++)
+
+    vector<int>::iterator initial_comp, rearrange, asc_swapper;
+    unsigned int count = 1;
+    cout << "Count: " << count << "\t";
+    printer(word, pointers);
+    count++;
+    while (count <= fact(length))
     {
-        for (vector<int>::iterator itter = pointers.begin(); itter!=pointers.end(); itter++)
+        initial_comp = pointers.end()-2;
+        while (*initial_comp > 0)
+        {
+            if (*initial_comp < *(initial_comp+1))
             {
-                *itter = (*itter+1)%length;
+                break;
             }
-        output(word, pointers);
+            else
+            {
+                initial_comp--;
+            }
+        }
+        rearrange = initial_comp + 1;
+        asc_swapper = pointers.end();
+            
+        //arranges all the numbers after initial_comp into ascending order
+        while (rearrange < asc_swapper)
+        {
+            unsigned int swapper = *rearrange;
+            *rearrange = *asc_swapper;
+            *asc_swapper = swapper;
+            rearrange++;
+            asc_swapper--;
+        }
+        rearrange = pointers.end();
+       
+        //finds the the largest number at the back so that it can be swapped
+        while (*rearrange > *initial_comp)
+        {
+            rearrange--;
+        }
+    
+        //swaps the largest number at the back of pointers with the number just infront of it
+        rearrange++;
+        unsigned int swapper = *initial_comp;
+        *initial_comp = *rearrange;
+        *rearrange = swapper;
+
+        cout << "Count: " << count << "\t";
+        printer(word, pointers);
+        count++;
     }
+    return 0;
 }
