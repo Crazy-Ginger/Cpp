@@ -4,7 +4,7 @@
 using namespace std;
 
 //used to allow for the length of permutations to be calculated
-int factorial(int numb)
+unsigned int factorial(int numb)
 {
 	if (numb > 1)
 	{
@@ -21,7 +21,7 @@ void appender(string word, vector<int> &pointers)
 {
 
 	string newOrder = "";
-	for (int i = 0; i < pointers.size(); i++)
+	for (unsigned int i = 0; i < pointers.size(); i++)
 	{
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
@@ -35,15 +35,13 @@ void Permuter(string word)
 	int length = word.size();
 
 	//fills the array defined above
-	for (int i = 0; i < length + 1; i++)
+	for (int i = 0; i < length; i++)
 	{
 		pointers.push_back(i);
-		//cout << "i: " << i << "\tlist[" << i << "]: " << pointers.at(i) << endl;
 	}
-	//cout << "filled vector\n";
-
-	//variable declarations mainly for swapping the values in the array around and for counting the number of permutations
-	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
+	
+    //variable declarations mainly for swapping the values in the array around and for counting the number of permutations
+	unsigned int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
 	
 	
 	cout << "Count: " << count << "\t";
@@ -52,14 +50,19 @@ void Permuter(string word)
 	for (count++; count <= factorial(length); ++count)
 	{
 		initial_comp = length - 2;
-		for (initial_comp; initial_comp >= 0; initial_comp--)
-		{
-			//cout << "list[initial_comp]" << list[initial_comp] << endl;
-			if (pointers.at(initial_comp) < pointers.at(initial_comp + 1))
-			{
-				break;
-			}
-		}	
+
+        while (pointers.at(initial_comp) > 0)
+        {
+            if (pointers.at(initial_comp) < pointers.at(initial_comp+1))
+            {
+                break;
+            }
+            else
+            {
+                initial_comp--;
+            }
+        }
+
 		rearrange = initial_comp + 1;
 		asc_swapper = length - 1;
 
