@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <time.h>
 using namespace std;
 
 //used to allow for the length of permutations to be calculated
@@ -21,11 +22,11 @@ void appender(string word, vector<int> &pointers)
 {
 
 	string newOrder = "";
-	for (int i = 0; i < pointers.size(); i++)
+	for (unsigned int i = 0; i < pointers.size(); i++)
 	{
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
-	cout << newOrder << endl;
+	//cout << newOrder << endl;
 }
 
 //generates the permutations of pointers and which can be passed to other functions
@@ -46,7 +47,7 @@ void Permuter(string word)
 	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
 	
 	
-	cout << "Count: " << count << "\t";
+	//cout << "Count: " << count << "\t";
 	appender(word, pointers);
 
 	for (count++; count <= factorial(length); ++count)
@@ -89,12 +90,12 @@ void Permuter(string word)
 		//print(list,length);
 		//cout << endl;
 
-		cout << "Count: " << count << "\t";
+		//cout << "Count: " << count << "\t";
 
 		appender(word, pointers);
 
 	}  //ensures the do keeps going and only check at the end if it's the last permutation
-
+    cout << "Final count: " << count-1 << endl;
 	//cout << "\nPermuted!" << endl;
 }
 
@@ -103,10 +104,19 @@ int main()
 {
 	//char release;
 	string word;
+    cout << "Word: ";
 	getline(cin, word);
+    
+    clock_t start, end;
+    start = clock();
 
 	Permuter(word);
-
+    
+    end = clock();
+    float tickDiff((float)end - float(start));
+    float clockDiff = tickDiff / CLOCKS_PER_SEC;
+    
+    cout << "Clock cout: " << tickDiff << "\tTime: " << clockDiff <<endl;
 	//cin >> release;
 	return 0;
 }
