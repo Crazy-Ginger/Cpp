@@ -5,10 +5,10 @@
 using namespace std;
 
 
-vector<int> primeSieve(vector <int> initial)
+vector<int> primeSieve(vector <int> vect)
 {
-    vector<int>::iterator start = initial.begin();
-    vector<int>::iterator end = initial.end();
+    vector<int>::iterator start = vect.begin();
+    vector<int>::iterator end = vect.end();
     if (start == end)
     {
         cout << "No numbers\n";
@@ -17,19 +17,22 @@ vector<int> primeSieve(vector <int> initial)
     {
         //clear the container with 0
         fill(start, end, 0);
-        //mark composites with 1
-        for (vector<int>::iterator prime_it = start + 1; prime_it != end; ++prime_it)
+        //mark composites with 1 by finding primes and then multiplying them and marking the multiples
+        for (vector<int>::iterator checker = start + 1; checker != end; ++checker)
         {
-            if (*prime_it == 1)
-                continue;
-            //determine the prime number represented by this iterator location
-            int stride = (prime_it - start) + 1;
-            //mark all multiples of this prime number up to max
-            vector<int>::iterator mark_it = prime_it;
-            while ((end - mark_it) > stride)
+            if (*checker == 1)
             {
-                advance(mark_it, stride);
-                *mark_it = 1;
+                continue;
+            }
+            //determine the prime number represented by this iterator location
+            int stride = (checker - start) + 1;
+            //mark all multiples of this prime number up to max
+            vector<int>::iterator marker = checker;
+            while ((end - marker) > stride)
+            {
+                //moves marker along the value of stride and assigns marker's value to 1
+                advance(marker, stride);
+                *marker = 1;
             }
         }
 
@@ -37,31 +40,34 @@ vector<int> primeSieve(vector <int> initial)
         vector<int>::iterator out_it = start;
         for (vector<int>::iterator it = start + 1; it != end; ++it)
         {
+            //finds the primes as they are marked with 0
             if (*it == 0)
             {
+                //moves the primes towards the front of the list
                 *out_it = (it - start) + 1;
                 ++out_it;
             }
         }
     }
+
     //removes the elements of the vector that doesn't contain primes
     vector<int>::iterator mark;
-    for (mark = initial.begin(); mark != initial.end(); ++mark)
+    for (mark = vect.begin(); mark != vect.end(); ++mark)
     {
             if (*mark == 1)
             {
-                    initial.erase(mark, initial.end());
+                    vect.erase(mark, vect.end());
                     break;
             }
     }
 
     //checks for an error that allows 0 to be the last element in the array of vectors
-    if (*(--initial.end()) == 0)
+    if (*(--vect.end()) == 0)
     {
-            initial.erase(--initial.end());
+            vect.erase(--vect.end());
     }
 
-    return initial;
+    return vect;
 }
 
 int main()
@@ -100,10 +106,10 @@ int main()
     //}
 
     ////display the primes
-    //for (size_t i = 0; i < primes.size(); ++i)
-    //{
-        //cout << "i: " << i << "\t prime: " << primes[i] << endl;
-    //}
+    for (size_t i = 0; i < primes.size(); ++i)
+    {
+        cout << "i: " << i+1 << "\t prime: " << primes[i] << endl;
+    }
 
     cout << "Clock count: " << tickDiff << "\tTime taken: " << clockDiff << endl;
     cout << "Number of primes: " << primes.size() << endl;
