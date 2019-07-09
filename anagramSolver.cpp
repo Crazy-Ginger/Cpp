@@ -5,6 +5,7 @@
 #include <algorithm>
 using namespace std;
 
+//created this to allow sorting strings by size
 struct lenCompare 
 {
     bool operator () (const string& first, const string& second)
@@ -13,7 +14,7 @@ struct lenCompare
     }
 };
 
-
+//obtains a 2D list from a wordlist which contains the original word as well as a string of the chars sort alphabetically
 vector <vector<string>> listGet(unsigned int length)
 {
     vector <vector<string>> words;
@@ -50,26 +51,26 @@ vector <vector<string>> listGet(unsigned int length)
 
 vector <string> charless(string word )
 {
-    //char release;
-    //cout << "\nCharless called again, word length: " << word.length() << endl;
+    //the list of words to be returned
     vector <string> words;
+    //duplicates so that the passed word isn't changed
     string temp = word;
-    //cout << "New less: " << word << endl;
-
+    
+    //iterates through the string and then if the string is longer than 1 recusively calls itself and adds the returned list to the list to be returned
     for (unsigned int i = 0; i < word.length(); i++)
     {
+        //removes a character from the string and then adds it to the list
         temp.erase(temp.begin()+i);
         words.push_back(temp);
+
+        //cheks if to call recusively
         if (temp.length() > 1)
         {
             vector <string> deeper = charless(temp);
             words.insert(words.end(), deeper.begin(), deeper.end());
         }
-        else
-        {
-            words.push_back(temp);
-        }
-        //cout << temp << endl;
+        
+        //sets temp to word again so that the process can be repeated
         temp = word;
     }
     //cin >> release;
@@ -85,24 +86,30 @@ int main()
     transform(word.begin(), word.end(), word.begin(), ::tolower);
     cout <<  endl;
     
+    //sorts the word into alphabetical order
     sort(word.begin(), word.end());
     cout << "Sorted: " << word << endl;
+    //gets a 2D vector with words and they're sorted form
     vector <vector <string>> dictionary = listGet(word.length());
     cout << "Got dictionary: " << dictionary.size() << "\n";
 
-    //charless(word);
-    vector <string> fullanagrams = charless(word); 
+    //gets a vector of all possible words from the main word
+    vector <string> anagrams = charless(word);
+    //creates a new list of anagrams that won't contain duplicates
     vector <string> redAnagrams;
+    //adds the original word to the redAnagrams
     redAnagrams.push_back(word);
+
     bool add = true;
     string adder;
 
-
-    cout << "fullAnagrams: " << fullanagrams.size() << endl;
-    for (vector<string>::iterator i=fullanagrams.begin(); i!=fullanagrams.end(); i++)
+    cout << "fullAnagrams: " << anagrams.size() << endl;
+    //iterates through the full list and adds new unique ones to the reduced list
+    for (vector<string>::iterator i=anagrams.begin(); i!=anagrams.end(); i++)
     {
         add = true;
         adder = *i;
+        //checks the word being added isn't already in there
         for (vector<string>::iterator j=redAnagrams.begin(); j!=redAnagrams.end(); j++)
         {
             if (*i == *j)
@@ -111,35 +118,41 @@ int main()
                 break;
             }
         }
+        
         if (add)
         {
             //cout << "Added: " << adder << endl;
             redAnagrams.push_back(adder);
         }
     }
-
+    
+    //removes the content from the vector and shrinks it so it can be reused as the solution list to save mem
+    anagrams.clear();
+    anagrams.shrink_to_fit();
     cout << "reduced Anagrams: " << redAnagrams.size() << endl;
-    //for (vector<string>::iterator i=redAnagrams.begin(); i!=redAnagrams.end(); i++)
-    //{
-        //cout << *i << endl;
-    //}
-    vector<string> solutions;
+    
     cout << "\nSolutions: \n";
     
+    //goes through the dictionary list and the anagrams list and looks for matching words and then adds them as solutions
     for (vector<string>::iterator i=redAnagrams.begin(); i!=redAnagrams.end(); i++)
     {
         for (unsigned int j = 0; j< dictionary.size(); j++)
         {
             if (*i == dictionary.at(j).at(1))
             {
-                solutions.push_back(dictionary.at(j).at(0));
+                anagrams.push_back(dictionary.at(j).at(0));
             }
         }
     }
-    
+
+    //removes redAnagrams from mem
+    vector<string>().swap(redAnagrams);
+    //instantiates the sorting struct
     lenCompare comp;
-    sort(solutions.begin(), solutions.end(), comp);
-    for (vector<string>::iterator i = solutions.begin(); i!=solutions.end(); i++)
+    //sorts the solutions by length order (long->short)
+    sort(anagrams.begin(), anagrams.end(), comp);
+    //prints to console line
+    for (vector<string>::iterator i = anagrams.begin(); i!=anagrams.end(); i++)
     {
         cout << *i << endl;
     }
