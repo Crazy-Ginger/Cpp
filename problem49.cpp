@@ -70,6 +70,92 @@ vector<int> primeSieve(vector <int> vect)
     return vect;
 }
 
+unsigned int factorial(int numb)
+{
+	if (numb > 1)
+	{
+		return numb * factorial(numb - 1);
+	}
+	else
+	{
+		return 1;
+	}
+}
+
+int appender(string word, vector<int> &pointers)
+{
+
+	string newOrder = "";
+	for (unsigned int i = 0; i < pointers.size(); i++)
+	{
+		newOrder.append(word.substr((pointers.at(i)), 1));
+	}
+    return stoi(newOrder);
+}
+
+vector <int> Permuter(string word)
+{
+    vector <int> perPrimes;
+    perPrimes.push_back(stoi(word));
+	vector<int> pointers;
+	int length = word.size();
+
+	for (int i = 0; i < length; i++)
+	{
+		pointers.push_back(i);
+	}
+	
+	unsigned int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
+
+	for (count++; count <= factorial(length); ++count)
+	{
+		initial_comp = length - 2;
+
+        while (pointers.at(initial_comp) > 0)
+        {
+            if (pointers.at(initial_comp) < pointers.at(initial_comp+1))
+            {
+                break;
+            }
+            else
+            {
+                initial_comp--;
+            }
+        }
+
+		rearrange = initial_comp + 1;
+		asc_swapper = length - 1;
+
+		while (rearrange < asc_swapper)
+		{
+			swapper = pointers.at(rearrange);
+			pointers.at(rearrange) = pointers.at(asc_swapper);
+			pointers.at(asc_swapper) = swapper;
+			rearrange++;
+			asc_swapper--;
+		}
+		rearrange = length - 1;
+
+		while (pointers.at(rearrange) > pointers.at(initial_comp))
+		{
+			rearrange--;
+		}
+
+		rearrange++;
+		swapper = pointers.at(initial_comp);
+		pointers.at(initial_comp) = pointers.at(rearrange);
+		pointers.at(rearrange) = swapper;
+        
+        int temp = appender(word, pointers);
+		if (primeCheck.at(temp))
+        {
+            perPrimes.push_back(temp);
+        }
+
+	}
+    return perPrimes;
+}
+
 
 int main()
 {
@@ -81,7 +167,14 @@ int main()
     {
         primeCheck.at(*mark) = true;
     }
-
-
+    
+    vector<vector<int>> perPrimes;
+    for (vector<int>::iterator i = primes.begin(); i!=primes.end();i++)
+    {
+        vector <int> temp = Permuter(to_string(*i));
+        cout << *i << ": " << temp.size() << endl;
+        perPrimes.push_back(temp);
+    }
+    cout << "numb of primePers: " << perPrimes.size() << endl;
     return 0;
 }
