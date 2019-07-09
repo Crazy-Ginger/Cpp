@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
+//#include <algorithm>
 using namespace std;
 
 vector<int> primes(1000);
@@ -95,20 +96,35 @@ vector <int> primeFactorer(int numb)
     return factors;
 }
 
+
+int numPrimeFac(int numb)
+{
+    vector<int> factors(1);
+    factors = primeFactorer(numb);
+
+    sort(factors.begin(), factors.end());
+    factors.erase(unique(factors.begin(), factors.end(), factors.end()));
+    cout << endl;
+    return factors.size();
+}
 int main()
 {
     primes = primeSieve(primes);
-    unsigned int numb;
-    cin >> numb;
 
-    vector<int> factors(1);
-    factors = primeFactorer(numb);
-    cout << "numbers of factors: " << factors.size() << endl;
-
-    for (unsigned int i = 0; i < factors.size(); i++)
+    int seqLen = 0;
+    for (int i = 100; i < 1000; i++)
     {
-        cout << i+1 << ": " << factors.at(i) << endl;
-    }
-   
+        cout << "i: " << i << endl;
+        int fac = numPrimeFac(i);
+        cout << "fact: " << fac << endl<< endl;
+        if (fac == 3)
+        {
+            seqLen ++;
+        }
+        else 
+        {
+            seqLen = 0;
+        }
+    } 
     return 0;
 }
