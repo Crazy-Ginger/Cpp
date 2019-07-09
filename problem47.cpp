@@ -1,8 +1,7 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <math.h>
-//#include <algorithm>
+#include <algorithm>
 using namespace std;
 
 vector<int> primes(1000);
