@@ -3,11 +3,12 @@
 #include <string>
 using namespace std;
 
+vector <bool> primeCheck(10001);
 
-vector<int> primeSieve(vector <int> initial)
+vector<int> primeSieve(vector <int> vect)
 {
-    vector<int>::iterator start = initial.begin();
-    vector<int>::iterator end = initial.end();
+    vector<int>::iterator start = vect.begin();
+    vector<int>::iterator end = vect.end();
     if (start == end)
     {
         cout << "No numbers\n";
@@ -16,7 +17,7 @@ vector<int> primeSieve(vector <int> initial)
     {
         //clear the container with 0
         fill(start, end, 0);
-        //mark composites with 1
+        //mark composites with 1 by finding primes and then multiplying them and marking the multiples
         for (vector<int>::iterator checker = start + 1; checker != end; ++checker)
         {
             if (*checker == 1)
@@ -24,11 +25,12 @@ vector<int> primeSieve(vector <int> initial)
                 continue;
             }
             //determine the prime number represented by this iterator location
-            unsigned int stride = (checker - start) + 1;
+            int stride = (checker - start) + 1;
             //mark all multiples of this prime number up to max
             vector<int>::iterator marker = checker;
             while ((end - marker) > stride)
             {
+                //moves marker along the value of stride and assigns marker's value to 1
                 advance(marker, stride);
                 *marker = 1;
             }
@@ -38,36 +40,47 @@ vector<int> primeSieve(vector <int> initial)
         vector<int>::iterator out_it = start;
         for (vector<int>::iterator it = start + 1; it != end; ++it)
         {
+            //finds the primes as they are marked with 0
             if (*it == 0)
             {
+                //moves the primes towards the front of the list
                 *out_it = (it - start) + 1;
                 ++out_it;
             }
         }
     }
+
     //removes the elements of the vector that doesn't contain primes
     vector<int>::iterator mark;
-    for (mark = initial.begin(); mark != initial.end(); ++mark)
+    for (mark = vect.begin(); mark != vect.end(); ++mark)
     {
             if (*mark == 1)
             {
-                    initial.erase(mark, initial.end());
+                    vect.erase(mark, vect.end());
                     break;
             }
     }
 
     //checks for an error that allows 0 to be the last element in the array of vectors
-    if (*(--initial.end()) == 0)
+    if (*(--vect.end()) == 0)
     {
-            initial.erase(--initial.end());
+            vect.erase(--vect.end());
     }
 
-    return initial;
+    return vect;
 }
 
 
 int main()
 {
+    vector <int> primes(10000);
+    primes = primeSieve(primes);
+
+    fill(primeCheck.begin(), primeCheck.end(), false);
+    for (vector<int>::iterator mark=primes.begin();mark!=primes.end();mark++)
+    {
+        primeCheck.at(*mark) = true;
+    }
 
 
     return 0;
