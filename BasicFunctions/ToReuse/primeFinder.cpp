@@ -91,12 +91,15 @@ int main()
         primeCheck.at(*mark) = true;
     }
 
-    while (true)
-    {
-        cin >> choice;
-        cout << primeCheck.at((int)choice) << endl;
-    }
-    //display the primes
+    ////allows user to check if chosen numbers are prime
+    //while (true)
+    //{
+        //cout << "Numb check: ";
+        //cin >> choice;
+        //cout << primeCheck.at((int)choice) << endl;
+    //}
+
+    ////display the primes
     //for (size_t i = 0; i < primes.size(); ++i)
     //{
         //cout << "i: " << i << "\t prime: " << primes[i] << endl;
