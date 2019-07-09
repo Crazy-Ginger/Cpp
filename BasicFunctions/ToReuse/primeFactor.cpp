@@ -87,7 +87,7 @@ vector <int> primeFactorer(int numb)
             {
                 vector <int> deeper = primeFactorer(numb/(*i));
                 factors.insert(factors.begin(), deeper.begin(), deeper.end());
-            
+            }
             //break ensures that for loop stops after its found one primefacter at each level
             break;
         }
