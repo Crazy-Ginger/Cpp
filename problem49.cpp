@@ -172,9 +172,19 @@ int main()
     for (vector<int>::iterator i = primes.begin(); i!=primes.end();i++)
     {
         vector <int> temp = Permuter(to_string(*i));
-        cout << *i << ": " << temp.size() << endl;
-        perPrimes.push_back(temp);
+        //cout << *i << ": " << temp.size() << endl;
+        if (temp.at(0) >= 1000)
+        {
+            perPrimes.push_back(temp);
+        }
     }
     cout << "numb of primePers: " << perPrimes.size() << endl;
+
+    for (unsigned int i = 0; i < perPrimes.size(); i++)
+    {
+        for (unsigned int j =0; j < perPrimes.at(i).size(); j++)
+        {
+        }
+    }
     return 0;
 }
