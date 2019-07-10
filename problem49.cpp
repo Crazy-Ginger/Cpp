@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 vector <bool> primeCheck(10001);
@@ -99,6 +100,7 @@ vector <int> Permuter(string word)
     perPrimes.push_back(stoi(word));
 	vector<int> pointers;
 	int length = word.size();
+    string charCheck = word.substr(word.size()-1, 1);
 
 	for (int i = 0; i < length; i++)
 	{
@@ -147,7 +149,10 @@ vector <int> Permuter(string word)
 		pointers.at(rearrange) = swapper;
         
         int temp = appender(word, pointers);
-		if (primeCheck.at(temp))
+        string lastChar = to_string(temp);
+        lastChar = lastChar.substr(lastChar.length()-1, 1);
+
+		if ((primeCheck.at(temp)) && (charCheck == lastChar))
         {
             perPrimes.push_back(temp);
         }
@@ -171,18 +176,52 @@ int main()
     vector<vector<int>> perPrimes;
     for (vector<int>::iterator i = primes.begin(); i!=primes.end();i++)
     {
-        vector <int> temp = Permuter(to_string(*i));
+        vector <int> dupes = Permuter(to_string(*i));
         //cout << *i << ": " << temp.size() << endl;
-        if (temp.at(0) >= 1000)
+        if (dupes.at(0) >= 1000)
         {
-            perPrimes.push_back(temp);
+            vector <int> uniq;
+            uniq.push_back(dupes.at(0));
+
+            for (unsigned int j=0; j< dupes.size(); j++)
+            {
+                bool push = true;
+                for (unsigned int k=0;k< uniq.size(); k++)
+                {
+                    if ((dupes.at(j) == uniq.at(k)) || ((to_string(dupes.at(j))).length() < 4))
+                    {
+                        push = false;
+                    }
+                }
+                if (push)
+                {
+                    uniq.push_back(dupes.at(j));
+                }
+            }
+            if (uniq.size() > 2 && uniq.at(0) < 5000)
+            {
+                sort(uniq.begin(), uniq.end());
+                perPrimes.push_back(uniq);
+            }
         }
     }
+
     cout << "numb of primePers: " << perPrimes.size() << endl;
 
+    //prints the list of lists
     for (unsigned int i = 0; i < perPrimes.size(); i++)
     {
-        for (unsigned int j =0; j < perPrimes.at(i).size(); j++)
+        cout << "Next:\n";
+        for (unsigned int j = 0; j < perPrimes.at(i).size(); j++)
+        {
+            cout << perPrimes.at(i).at(j) << endl;
+        }
+        cout << endl;
+    }
+
+    for (unsigned int base=0; base<perPrimes.size(); base++)
+    {
+        for (unsigned int i=0; i<perPrimes.at(base).size(); i++)
         {
         }
     }
