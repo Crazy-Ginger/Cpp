@@ -4,21 +4,23 @@ using namespace std;
 
 int main()
 {
-    vector <int> list = {1487, 1847, 4817, 8147};
-    int diff, lastDiff = 0;
-    for (unsigned int i = 0; i < list.size()-1; i++)
+    vector <int> list;
+    for (int i = 1; i < 7; i++)
     {
-        lastDiff = 0;
-        cout << "i: " << i  << endl;
-        for (unsigned int j = i+1; j < list.size(); j++)
+        list.push_back(i);
+        cout << i << ", ";
+    }
+    cout << endl << list.size() << endl;
+
+    for (int i = 1; i < list.size(); i++)
+    {
+        for (int j = 0; j < list.size()-i; j++)
         {
-            diff = list.at(j) - list.at(i);
-            if (diff == lastDiff*2)
+            for (int k = 0; k <= i; k++)
             {
-                cout << "at i: " << list.at(i) << "\t" << list.at(j-1) << "\t" << list.at(j) << endl;
+                cout << list.at(j+k) << ", ";
             }
-            cout << diff << endl;
-            lastDiff = diff;
+            cout << endl;
         }
     }
 

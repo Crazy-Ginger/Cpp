@@ -81,6 +81,25 @@ int main()
         primeCheck.at(*i) = true;
     }
 
+    unsigned int largSum = 0, curSum;
 
+    //write displacement algorithm so that after each run it increases the length of the group and then tries that across every prime by iterating across it
+    for (unsigned int i = 1; i < primes.size(); i++)
+    {
+        for (unsigned int j = 0; j < primes.size()-i; j++)
+        {
+            curSum =0;
+            for (unsigned int k = 0; k <= i; k++)
+            {
+                curSum += primes.at(j+k);
+            }
+            if (curSum > largSum && primeCheck.at(curSum))
+            {
+                cout << curSum << endl;
+                largSum = curSum;
+            }
+        }
+    }
+    cout <<"large sum: " << largSum << endl;
     return 0;
 }
