@@ -219,10 +219,17 @@ int main()
         cout << endl;
     }
 
+    //final piece of code needed to find linear funciton in each list in the bigger list. Not sure how to do that just yet
     for (unsigned int base=0; base<perPrimes.size(); base++)
     {
-        for (unsigned int i=0; i<perPrimes.at(base).size(); i++)
+        cout << "Next:\n";
+        int diff, prevNum;
+        for (unsigned int i=0; i<perPrimes.at(base).size()-1; i++)
         {
+            for (unsigned int j = 1; j<perPrimes.at(base).size(); j++)
+            {
+                diff = perPrimes.at(base).at(j) - perPrimes.at(base).at(i);
+            }
         }
     }
     return 0;
