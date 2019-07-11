@@ -4,8 +4,7 @@ using namespace std;
 
 int main()
 {
-    string word = "lengthhere";
-    string lastChar = word.substr(word.length()-1, 1);
-    cout << "word: " << word << "\tlastChar: " << lastChar << endl;
+    vector <int> list = {1487, 1847, 4817, 8147};
+    
     return 0;
 }
