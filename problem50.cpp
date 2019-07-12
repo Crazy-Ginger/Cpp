@@ -71,35 +71,39 @@ vector<int> primeSieve(vector <int> vect)
 
 int main()
 {
-    vector <int> primes(100);
+    vector <int> primes(10000000);
     primes = primeSieve(primes);
 
-    vector <bool> primeCheck (101);
+    vector <bool> primeCheck (10000001);
     fill(primeCheck.begin(), primeCheck.end(), false);
     for (vector<int>::iterator i = primes.begin(); i!=primes.end(); i++)
     {
         primeCheck.at(*i) = true;
     }
 
-    unsigned int largSum = 0, curSum;
+    unsigned int largLen = 0, curLen, sum, largSum;
 
     //write displacement algorithm so that after each run it increases the length of the group and then tries that across every prime by iterating across it
-    for (unsigned int i = 1; i < primes.size(); i++)
+    for (unsigned int i = 1; i < 7919; i++)
     {
-        for (unsigned int j = 0; j < primes.size()-i; j++)
+        for (unsigned int j = 0; j < 7919-i; j++)
         {
-            curSum =0;
+            curLen = i+1;
+            sum = 0;
             for (unsigned int k = 0; k <= i; k++)
             {
-                curSum += primes.at(j+k);
+                //cout << primes.at(j+k) << ", ";
+                sum += primes.at(j+k);
             }
-            if (curSum > largSum && primeCheck.at(curSum))
+            if (curLen > largLen && primeCheck.at(sum) && sum < 100)
             {
-                cout << curSum << endl;
-                largSum = curSum;
+                //cout << curSum << endl;
+                largLen = curLen;
+                largSum = sum;
+                cout << "\tcurSum: \033[1;31m" << sum << " " << curLen << "\033[0m\n";
             }
         }
     }
-    cout <<"large sum: " << largSum << endl;
+    cout <<"largest list: " << largLen << "\tsum: " << largSum << endl;
     return 0;
 }
