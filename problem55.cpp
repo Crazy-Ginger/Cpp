@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-double reverser(int i)
+double reverser(unsigned int i)
 {
     string numb = to_string(i);
     string reversed;
@@ -14,7 +14,7 @@ double reverser(int i)
     return stod(reversed);
 }
 
-bool palCheck(int i)
+bool palCheck(unsigned int i)
 {
     string numb = to_string(i);
 
