@@ -47,7 +47,7 @@ int cycles(double i)
     while (cycles <= 50)
     {
         //cout << cycles << endl;
-        if (palCheck(i))
+        if ((cycles != 0) && palCheck(i))
         {
             //cout << "escaped\n";
             return cycles;
@@ -65,7 +65,7 @@ int main()
     for (double i = 10; i <=10000; i++)
     {
         //cout << "i: " << i << endl;
-        if (cycles(i) >= 50)
+        if (cycles(i) >= 51)
         {
             cout << "i: " << i << endl;
             total++;
