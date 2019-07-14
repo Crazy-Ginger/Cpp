@@ -5,9 +5,13 @@ using namespace std;
 
 int main()
 {
-    double i = 10;
-    cout << to_string(i) << endl;
-
+    string  i = "1000000000000";
+    unsigned long long intI = stoull(i);
+    cout << i << " became " << intI << endl;
+    if (intI == 1000000000000)
+    {
+        cout << "true\n";
+    }
     return 0;
 }
 
