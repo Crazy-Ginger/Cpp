@@ -26,7 +26,7 @@ void appender(string word, vector<int> &pointers)
 	{
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
-	//cout << newOrder << endl;
+	cout << newOrder << endl;
 }
 
 //generates the permutations of pointers and which can be passed to other functions

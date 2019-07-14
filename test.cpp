@@ -1,17 +1,16 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
 using namespace std;
 
 int main()
 {
-    string  i = "1000000000000";
-    unsigned long long intI = stoull(i);
-    cout << i << " became " << intI << endl;
-    if (intI == 1000000000000)
-    {
-        cout << "true\n";
-    }
+    double i = 3;
+    double temp = pow(i, 5), throwAway;
+    temp = cbrt(temp);
+    cout << temp << "\trooted: " << temp << endl;
+    cout << "modf: " << modf(temp, &throwAway) << endl;
     return 0;
 }
 
