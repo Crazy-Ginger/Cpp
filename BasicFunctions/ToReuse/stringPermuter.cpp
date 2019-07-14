@@ -48,7 +48,7 @@ void Permuter(string word)
 	//cout << "Count: " << count << "\t";
 	appender(word, pointers);
 
-	for (count++; count <= factorial(length); ++count)
+	while (count < factorial(length))
 	{
 		initial_comp = length - 2;
 
@@ -96,9 +96,10 @@ void Permuter(string word)
 		//cout << "Count: " << count << "\t";
 
 		appender(word, pointers);
+        count++;
 
 	}  //ensures the do keeps going and only check at the end if it's the last permutation
-    cout << "Final count: " << count-1 << endl;
+    cout << "Final count: " << count << endl;
 	//cout << "\nPermuted!" << endl;
 }
 

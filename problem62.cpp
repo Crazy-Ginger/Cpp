@@ -107,7 +107,7 @@ int permuter(string word)
 int main()
 {
     char release;
-    unsigned int cube = 2; 
+    unsigned int cube = 5; 
     bool solved = false;
     while (!solved)
     {
