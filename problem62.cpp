@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <algorithm>
 using namespace std;
-
 
 unsigned int factorial(int numb)
 {
@@ -17,9 +17,13 @@ unsigned int factorial(int numb)
 	}
 }
 
-bool appender(string word, vector<int> &pointers)
-{
 
+int appender(string word, vector<int> &pointers)
+{
+    if (word.substr(pointers.at(0), 1) == "0")
+    {
+        return -1;
+    }
 	string newOrder = "";
 	for (unsigned int i = 0; i < pointers.size(); i++)
 	{
@@ -28,20 +32,24 @@ bool appender(string word, vector<int> &pointers)
 	//cout << newOrder << endl;
     double newInt = stod(newOrder), throwAway, toKeep;
     toKeep = newInt;
-    newInt = round(100000*cbrt(newInt))/100000;
-    if (modf(newInt, &throwAway) == 0)
+    newInt = round(10000*cbrt(newInt))/10000;
+    if (modf(newInt, &throwAway) == 0 && pow(throwAway,3) == toKeep)
     {
-        cout << "passed as: " << toKeep << " -> " << newInt << "\t";
-        cout << endl;
-        return true;
+        //cout << "passed as: " << toKeep << " -> " << newInt << "\t" << endl;
+        return (int)throwAway;
     }
-    return false;
+    return -1;
 }
+
 
 int permuter(string word)
 {
 	vector<int> pointers;
-	int length = word.size(), cubes = 1;
+    vector<int> cubeRoots;
+    int firstPush = round(10000*cbrt(stod(word)))/10000;
+    cubeRoots.push_back(firstPush);
+    int length = word.size();
+
 	//fills the array defined above
 	for (int i = 0; i < length; i++)
 	{
@@ -52,7 +60,7 @@ int permuter(string word)
 	
 	
 	//cout << "Count: " << count << "\t";
-    cout << "repeating for: " << factorial(length) << endl;
+    //cout << "repeating for: " << factorial(length) << endl;
 	for (count++; count <= factorial(length); ++count)
 	{
 		initial_comp = length - 2;
@@ -94,33 +102,57 @@ int permuter(string word)
 		pointers.at(initial_comp) = pointers.at(rearrange);
 		pointers.at(rearrange) = swapper;
 
-
-		if(appender(word, pointers))
+        int checker = appender(word, pointers);
+		if(checker != -1)
         {
-            cubes++;
-            cout <<  cubes << " cubes" << endl;
+            bool toPush = true;
+            for (unsigned int i = 0; i < cubeRoots.size(); i++)
+            {
+                if (cubeRoots.at(i) == checker)
+                {
+                    toPush = false;
+                    break;
+                }
+            }
+            if (toPush)
+            {
+                cubeRoots.push_back(checker);
+            }
         }
     }
-    return cubes;
+    //cout << cubeRoots.size() << " cubes" << endl;
+    if (cubeRoots.size() > 2)
+    {
+        for (unsigned int i = 0; i < cubeRoots.size(); i++)
+        {
+            cout << cubeRoots.at(i) <<"("<<pow(cubeRoots.at(i),3)<<"), ";
+        }
+        cout << endl;
+    }
+    return cubeRoots.size();
 }
 
 
 int main()
 {
-    double cube = 5; 
+    double cube = 300;
     bool solved = false;
     while (!solved)
     {
         int power = round(pow(cube, 3));
-        cout << "start cube: " << cube << "\tcubed: " << power <<  endl;
         string str = to_string(power);
-        cout << "string: " << str << endl;
-        if (permuter(str) == 3)
+        //cout << "string: " << str << endl;
+        
+        int cubePerm = permuter(str);
+        if (cubePerm > 2)
         {
+            cout << "start cube: " << cube << "\tcubes: " << cubePerm << endl;
+            if (cubePerm > 4)
+            {
             solved = true;
+            }
         }
         cube++;
-
     }
     return 0;
 }
