@@ -26,11 +26,13 @@ bool appender(string word, vector<int> &pointers)
 		newOrder.append(word.substr((pointers.at(i)), 1));
 	}
 	//cout << newOrder << endl;
-    double newInt = stod(newOrder), throwAway;
-    newInt = cbrt(newInt);
+    double newInt = stod(newOrder), throwAway, toKeep;
+    toKeep = newInt;
+    newInt = round(100000*cbrt(newInt))/100000;
     if (modf(newInt, &throwAway) == 0)
     {
-        cout << "passed appender as: " << newInt << endl;
+        cout << "passed as: " << toKeep << " -> " << newInt << "\t";
+        cout << endl;
         return true;
     }
     return false;
@@ -50,8 +52,7 @@ int permuter(string word)
 	
 	
 	//cout << "Count: " << count << "\t";
-	appender(word, pointers);
-
+    cout << "repeating for: " << factorial(length) << endl;
 	for (count++; count <= factorial(length); ++count)
 	{
 		initial_comp = length - 2;
@@ -106,17 +107,18 @@ int permuter(string word)
 
 int main()
 {
-    char release;
-    unsigned int cube = 5; 
+    double cube = 5; 
     bool solved = false;
     while (!solved)
     {
-        cout << "start cube: " << cube << endl;
-        if (permuter(to_string(pow(cube, 3))) == 3)
+        int power = round(pow(cube, 3));
+        cout << "start cube: " << cube << "\tcubed: " << power <<  endl;
+        string str = to_string(power);
+        cout << "string: " << str << endl;
+        if (permuter(str) == 3)
         {
             solved = true;
         }
-        cin >> release;
         cube++;
 
     }

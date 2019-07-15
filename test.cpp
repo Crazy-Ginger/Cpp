@@ -1,16 +1,27 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <cmath>
+#include <math.h>
 using namespace std;
 
 int main()
 {
-    double i = 3;
-    double temp = pow(i, 5), throwAway;
-    temp = cbrt(temp);
-    cout << temp << "\trooted: " << temp << endl;
-    cout << "modf: " << modf(temp, &throwAway) << endl;
+    double input, throwAway, frac;
+    cout << "input: ";
+    cin >> input;
+    cout << endl;
+    cout << "cbrt(input): " << cbrt(input) << endl;
+
+    cout << "is a cube?: ";
+    input = cbrt(input);
+    input = round(input*100000)/100000;
+
+    if (modf(input, &throwAway) == 0)
+    {
+        cout << "true" << endl;
+    }
+    else
+    {
+        cout << "false" << endl;
+    }
     return 0;
 }
 
