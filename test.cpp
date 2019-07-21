@@ -1,27 +1,16 @@
 #include <iostream>
-#include <math.h>
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
-    double input, throwAway, frac;
-    cout << "input: ";
-    cin >> input;
-    cout << endl;
-    cout << "cbrt(input): " << cbrt(input) << endl;
+    cout << "argc: " << argc << endl;
 
-    cout << "is a cube?: ";
-    input = cbrt(input);
-    input = round(input*100000)/100000;
+    for (int i = 1; i < argc; i++)
+    {
+        cout << argv[i] << endl;
+    }
 
-    if (modf(input, &throwAway) == 0)
-    {
-        cout << "true" << endl;
-    }
-    else
-    {
-        cout << "false" << endl;
-    }
-    return 0;
+    cout << "done\n";
+    return 1;
 }
 
