@@ -10,12 +10,12 @@ void MyFilledCircle(Mat img, Point center);
 void MyPolygon(Mat img);
 void MyLine(Mat img, Point start, Point end);
 
-int w = 400;
+int w;
 
-int main(void)
+int main(int argc, char* argv[])
 {
     char atom_window[] = "Drawing 1: Atom";
-
+    w = atoi(argv[1]);
     Mat atom_image = Mat::zeros(w, w, CV_8UC3);
 
     MyEllipse(atom_image, 90);
@@ -25,6 +25,8 @@ int main(void)
 
     MyFilledCircle(atom_image, Point(w/2, w/2));
 
+    namedWindow(atom_window);
+    moveWindow(atom_window, 0, 0);
     imshow(atom_window, atom_image);
     waitKey(0);
     return 0;
