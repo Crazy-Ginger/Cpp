@@ -4,19 +4,19 @@
 #include <random>	//new sexier random
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
-	char release;
 	//srand(time(NULL)); //inititaises random seed (old way)
 
-
+    int limit = atoi(argv[1]);
 	//generates random number
     random_device rd;
     default_random_engine rng(rd());
 
-	uniform_int_distribution <> range(1, 10000); //creates a range from 1 to 10000 (inclusive)
-
-//used to test the random works
+    //creates a range from 1 to 10000 (inclusive)
+	uniform_int_distribution <> range(1, limit);
+    
+    //used to test the random works
 /* 	double sum = 0;
 	int temp;
 	int average; */
@@ -28,6 +28,5 @@ int main()
 	}
 /* 	average = sum / 100000;
 	cout << "average: " << average*2 << endl; */
-	cin >> release;
 	return 0;
 }
