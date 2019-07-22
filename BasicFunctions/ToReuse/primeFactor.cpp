@@ -4,7 +4,7 @@
 #include <math.h>
 using namespace std;
 
-vector<int> primes(1000);
+vector<int> primes;
 int depth = 0;
 vector<int> primeSieve(vector <int> initial)
 {
@@ -95,11 +95,11 @@ vector <int> primeFactorer(int numb)
     return factors;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    int numb = atoi(argv[1]);
+    primes.resize(numb);
     primes = primeSieve(primes);
-    unsigned int numb;
-    cin >> numb;
 
     vector<int> factors(1);
     factors = primeFactorer(numb);
@@ -107,8 +107,17 @@ int main()
 
     for (unsigned int i = 0; i < factors.size(); i++)
     {
-        cout << i+1 << ": " << factors.at(i) << endl;
+        if (i == factors.size()-1)
+        {
+            cout << factors.at(i);
+        }
+        else
+        {
+            cout << factors.at(i) << ", ";
+        }
+
     }
+    cout << endl;
    
     return 0;
 }

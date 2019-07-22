@@ -77,14 +77,12 @@ vector <string> charless(string word )
     return words;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    cout << "Word: ";
-    string word;
+    string word = argv[1];
+    cout << "Word: " << word << endl;
     //char release;
-    getline(cin, word);
     transform(word.begin(), word.end(), word.begin(), ::tolower);
-    cout <<  endl;
     
     //sorts the word into alphabetical order
     sort(word.begin(), word.end());

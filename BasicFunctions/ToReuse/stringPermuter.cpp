@@ -104,12 +104,11 @@ void Permuter(string word)
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
 	//char release;
-	string word;
-    cout << "Word: ";
-	getline(cin, word);
+	string word = argv[1];
+    cout << "Word: " << word << endl;
     
     clock_t start, end;
     start = clock();

@@ -70,11 +70,9 @@ vector<int> primeSieve(vector <int> vect)
     return vect;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    double choice;
-
-    cin >> choice;
+    double choice = atof(argv[1]);
     vector<int> primes(choice);
 
     clock_t clock_start, clock_end;
