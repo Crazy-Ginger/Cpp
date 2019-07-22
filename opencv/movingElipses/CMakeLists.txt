@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.8)
+project(movingElipses)
+find_package( OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+add_executable(elipse elipse.cpp)
+target_link_libraries(elipse ${OpenCV_LIBS})
