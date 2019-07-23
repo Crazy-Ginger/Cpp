@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     uniform_int_distribution <> colourRange(0, 255);
     int canSize = atoi(argv[1]);
     vector <movLipse> lipses;
-    for (int i = 0; i < 40; i++)
+    for (int i = 0; i < 50; i++)
     {
         movLipse newOne;
         newOne.thickness = canSize/100;
@@ -46,10 +46,10 @@ int main(int argc, char* argv[])
         newOne.setCentre(canSize/2, canSize/2);
         newOne.height = canSize/4;
         newOne.width = canSize/16;
-        newOne.colour = Scalar(colourRange(rng), colourRange(rng), colourRange(rng));
+        newOne.colour = Scalar(20, 50, colourRange(rng));
         lipses.push_back(newOne);
     }
-    for (double i = 0; i < 90; i++)
+    for (double i = 0; i < 360; i++)
     {
         Mat frame = Mat::zeros(canSize, canSize, CV_8UC3);
         char windowName[] = "frame";
@@ -58,10 +58,10 @@ int main(int argc, char* argv[])
         for (unsigned int j = 0; j < lipses.size(); j++)
         {
             lipses.at(j).addtoImg(frame);
-            lipses.at(j).angle ++;
+            lipses.at(j).angle += j/2 +1;
         }
         imshow(windowName, frame);
-        waitKey(30);
+        waitKey(50);
     }
     return 0;
 }
