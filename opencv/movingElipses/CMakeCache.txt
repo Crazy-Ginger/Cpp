@@ -139,7 +139,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=movingElipses
+CMAKE_PROJECT_NAME:STATIC=spinEllipses
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -208,6 +208,12 @@ movingElipses_BINARY_DIR:STATIC=/home/becca/Documents/Source/Cpp/opencv/movingEl
 
 //Value Computed by CMake
 movingElipses_SOURCE_DIR:STATIC=/home/becca/Documents/Source/Cpp/opencv/movingElipses
+
+//Value Computed by CMake
+spinEllipses_BINARY_DIR:STATIC=/home/becca/Documents/Source/Cpp/opencv/movingElipses
+
+//Value Computed by CMake
+spinEllipses_SOURCE_DIR:STATIC=/home/becca/Documents/Source/Cpp/opencv/movingElipses
 
 
 ########################

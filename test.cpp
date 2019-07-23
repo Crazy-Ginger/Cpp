@@ -1,16 +1,17 @@
 #include <iostream>
+#include <time.h>
+#include <random>
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    cout << "argc: " << argc << endl;
-
-    for (int i = 1; i < argc; i++)
+    random_device rd;
+    default_random_engine rng(rd());
+    uniform_int_distribution <> range(1, 10);
+    for (int i = 0; i < 100; i++)
     {
-        cout << argv[i] << endl;
+        cout << range(rng) << endl;
     }
-
-    cout << "done\n";
     return 1;
 }
 
