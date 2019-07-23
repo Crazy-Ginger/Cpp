@@ -32,35 +32,68 @@ class movLipse
 
 int main(int argc, char* argv[])
 {
+    //establishes the random stuff to allow randomisation of the start angle and colour of the ellipses
     random_device rd;
     default_random_engine rng(rd());
     uniform_int_distribution <> angleRange(5, 180);
     uniform_int_distribution <> colourRange(0, 255);
+
+    //takes the user input size for the image
     int canSize = atoi(argv[1]);
+    //creates a vector of the lipses class to allow many to be displayed
     vector <movLipse> lipses;
-    for (int i = 0; i < 50; i++)
+
+    //adds the ellipses to the vector of them and customises them before they're added
+    for (int i = 0; i < 10; i++)
     {
         movLipse newOne;
         newOne.thickness = canSize/100;
         newOne.angle = angleRange(rng);
         newOne.setCentre(canSize/2, canSize/2);
-        newOne.height = canSize/4;
-        newOne.width = canSize/16;
-        newOne.colour = Scalar(20, 50, colourRange(rng));
+        newOne.height = canSize/2 -20;
+        newOne.width = canSize/8 -20;
+        newOne.colour = Scalar(255, 255, 255);
         lipses.push_back(newOne);
     }
+    
+    
     for (double i = 0; i < 360; i++)
     {
+        Point seed(4, 4);
+        //creates the basic frame that will contain the basic ellipes
         Mat frame = Mat::zeros(canSize, canSize, CV_8UC3);
+        //initiallises the other mats to hold the greyscale, cannied and filled ellipses
+        Mat greyFrame, cframe, mask;
+
+        //sets the name of the images to be shown and establishes the window and resets its position
         char windowName[] = "frame";
         namedWindow(windowName);
         moveWindow(windowName, 0, 0);
+
+        //adds all the ellipses to the image
         for (unsigned int j = 0; j < lipses.size(); j++)
         {
+            //adds the ellipse to the image
             lipses.at(j).addtoImg(frame);
+            //adds to the angle for its next display time
             lipses.at(j).angle += j/2 +1;
         }
-        imshow(windowName, frame);
+        //greyscales and then blurs the entire image (to be cannied) and saves it over the grey image mat
+        cvtColor(frame, greyFrame, COLOR_BGR2GRAY);
+        blur(greyFrame, greyFrame, Size(3,3));
+        //cannies the entire image and saves it as a new image mat
+        Canny(greyFrame, cframe, 50, 50*3, 3);
+        
+        //copies the cannied image onto mask and then...?
+        mask = cframe;
+        copyMakeBorder(mask, mask, 1, 1, 1, 1, BORDER_REPLICATE);
+        //creating a bunch of throwaway variables and gets a point that should be inside the ellipses
+        int ellipseEdge = canSize/2 + canSize/8 + 5, filled;
+        Rect recta;
+        filled = floodFill(cframe, mask, Point(canSize/2, ellipseEdge), Scalar(255), &recta, Scalar(0), Scalar(254));
+        
+        //displays the image and then waits 50 milliseconds before destroing it and running again
+        imshow(windowName, cframe);
         waitKey(50);
     }
     return 0;
