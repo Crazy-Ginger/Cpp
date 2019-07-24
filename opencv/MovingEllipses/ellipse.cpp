@@ -59,11 +59,11 @@ int main(int argc, char* argv[])
     
     for (double i = 0; i < 360; i++)
     {
-        Point seed(4, 4);
+        Point seed(3,3);
         //creates the basic frame that will contain the basic ellipes
         Mat frame = Mat::zeros(canSize, canSize, CV_8UC3);
         //initiallises the other mats to hold the greyscale, cannied and filled ellipses
-        Mat greyFrame, cframe, mask;
+        Mat greyFrame, cframe, mask, fillFrame;
 
         //sets the name of the images to be shown and establishes the window and resets its position
         char windowName[] = "frame";
@@ -80,21 +80,48 @@ int main(int argc, char* argv[])
         }
         //greyscales and then blurs the entire image (to be cannied) and saves it over the grey image mat
         cvtColor(frame, greyFrame, COLOR_BGR2GRAY);
-        blur(greyFrame, greyFrame, Size(3,3));
+        blur(greyFrame, greyFrame, Size(2,2));
         //cannies the entire image and saves it as a new image mat
-        Canny(greyFrame, cframe, 50, 50*3, 3);
+        Canny(greyFrame, cframe, 10, 30, 5);
         
+        /*{
+        //tryied to create code that would fill the inside of the cannied ellipses but has problems with the edges being incomplete
         //copies the cannied image onto mask and then...?
         mask = cframe;
+        fillFrame = cframe;
         copyMakeBorder(mask, mask, 1, 1, 1, 1, BORDER_REPLICATE);
+
         //creating a bunch of throwaway variables and gets a point that should be inside the ellipses
-        int ellipseEdge = canSize/2 + canSize/8 + 5, filled;
+
+        int ellipseEdge = 0;
+        bool passedWhite = false, cont = false;
+        while (!cont)
+        {
+            if ((fillFrame.at<int>(canSize/2, ellipseEdge) == 0) && passedWhite)
+            {
+                cont = true;
+            }
+            else if (fillFrame.at<int>(canSize/2, ellipseEdge) !=0)
+            {
+                passedWhite = true;
+                ellipseEdge ++;
+            }
+            else 
+            {
+                ellipseEdge++;
+            }
+        }
         Rect recta;
-        filled = floodFill(cframe, mask, Point(canSize/2, ellipseEdge), Scalar(255), &recta, Scalar(0), Scalar(254));
-        
+        //fills the spaces with white block
+        floodFill(fillFrame, mask, Point(canSize/2, ellipseEdge), Scalar(100), &recta, Scalar(0), Scalar(230));
+
+        Mat colourFill;
+        cvtColor(fillFrame, colourFill, COLOR_GRAY2BGR);
+        circle(colourFill, Point(canSize/2, ellipseEdge), 5, Scalar(0,0,255),FILLED, LINE_8);
         //displays the image and then waits 50 milliseconds before destroing it and running again
+        imshow(windowName, colourFill);}*/
         imshow(windowName, cframe);
-        waitKey(50);
+        waitKey(40);
     }
     return 0;
 }
