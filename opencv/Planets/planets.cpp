@@ -20,7 +20,7 @@ class movLipse
         int height;
         Point centre;
         Scalar colour;
-
+        bool down = false;
         void setCentre(int y, int x)
         {
             centre = Point(x, y);
@@ -62,18 +62,43 @@ int main(int argc, char* argv[])
         itter += 1;
     }
 
+    for (int j = 0; j < 100; j++)
+    {
     Mat frame = Mat::zeros(canSize, canSize*1.7, CV_8UC3);
     char windowName[] = "frame";
     namedWindow(windowName);
     moveWindow(windowName, 0, 0);
     circle(frame, Point((canSize*1.7)/2, canSize/2), canSize/6, Scalar(255,0,0), FILLED, LINE_8);
-
-    for (unsigned int i = 0; i < lipses.size(); i++)
-    {
-        lipses.at(i).addtoImg(frame);
+        for (unsigned int i = 0; i < lipses.size(); i++)
+        {
+            lipses.at(i).addtoImg(frame);
+            
+            if (lipses.at(i).angle > 30)
+            {
+                lipses.at(i).angle--;
+                lipses.at(i).down =  true;
+            }
+            else if (lipses.at(i).angle < -30)
+            {
+                lipses.at(i).angle++;
+                lipses.at(i).down = false;
+            }
+            else if (lipses.at(i).down)
+            {
+                lipses.at(i).angle--;
+            }
+            else if (!lipses.at(i).down)
+            {
+                lipses.at(i).angle++;
+            }
+            else
+            {
+                cout << "um... something gone wrong at: " << i << endl;
+            }
+        }
+        ellipse(frame, Point((canSize*1.7)/2, canSize/2), Size(canSize/6, canSize/6), 0, 180, 360, Scalar(255,0,0), FILLED, LINE_8);
+        imshow(windowName, frame);
+        waitKey(40);
     }
-    ellipse(frame, Point((canSize*1.7)/2, canSize/2), Size(canSize/6, canSize/6), 0, 180, 360, Scalar(255,0,0), FILLED, LINE_8);
-    imshow(windowName, frame);
-    waitKey(0);
     return 1;
 }
