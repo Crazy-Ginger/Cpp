@@ -1,0 +1,11 @@
+First brown:
+18, 16, 12
+
+Second brown:
+40, 37, 28
+
+Planet
+light:
+88, 80, 51
+dark:
+40, 39, 28
