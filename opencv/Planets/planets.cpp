@@ -15,7 +15,6 @@ class movLipse
     public:
         int thickness;
         int lineType;
-        int angle;
         int width;
         int height;
         Point centre;
@@ -26,7 +25,7 @@ class movLipse
             centre = Point(x, y);
         }
 
-        void addtoImg(Mat img)
+        void addtoImg(Mat img, int angle)
         {
             ellipse(img, centre, Size(width,height), angle, 0, 360, colour, thickness, lineType);
         }
@@ -43,7 +42,7 @@ int main(int argc, char* argv[])
     uniform_int_distribution <> bCol(-8, 8);
 
 
-    int iniAngle = aRand(rng), itter = 0;
+    int itter = 0;
     int canSize = atoi(argv[1]);
     double rad = canSize/2.7, ang = atof(argv[3]);
     double height = abs(cos(3.14/ang)*rad);
@@ -54,7 +53,6 @@ int main(int argc, char* argv[])
     {
         movLipse newOne;
         newOne.thickness = 1;
-        newOne.angle = iniAngle;
         newOne.setCentre(canSize/2, (canSize*1.7)/2);
         newOne.width = rad +itter;
         newOne.height = height + cos(3.14/ang)*itter;
@@ -63,6 +61,8 @@ int main(int argc, char* argv[])
         itter += 1;
     }
 
+    bool down = true;
+    int angle = aRand(rng);
     //creates loop to allow oscilation
     for (;;)
     {
@@ -77,34 +77,36 @@ int main(int argc, char* argv[])
         for (unsigned int i = 0; i < lipses.size(); i++)
         {
             //adds the lipses to the image
-            lipses.at(i).addtoImg(frame);
-            
-            //checks if the lipses are at the max on min height and then if they're heading up or down and then increments or decrements the angle for the next frame
-            if (lipses.at(i).angle > 20)
-            {
-                lipses.at(i).angle--;
-                lipses.at(i).down =  true;
-            }
-            else if (lipses.at(i).angle < -20)
-            {
-                lipses.at(i).angle++;
-                lipses.at(i).down = false;
-            }
-            else if (lipses.at(i).down)
-            {
-                lipses.at(i).angle--;
-            }
-            else if (!lipses.at(i).down)
-            {
-                lipses.at(i).angle++;
-            }
-            else
-            {
-                cout << "um... something gone wrong at: " << i << endl;
-            }
+            lipses.at(i).addtoImg(frame, angle);
+        } 
+        //checks if the lipses are at the max on min height and then if they're heading up or down and then increments or decrements the angle for the next frame
+        if (angle > 20)
+        {
+            angle--;
+            down =  true;
         }
+        else if (angle < -20)
+        {
+            angle++;
+            down = false;
+        }
+        else if (down)
+        {
+            angle--;
+        }
+        else if (!down)
+        {
+            angle++;
+        }
+        else
+        {
+            cout << "um... something gone wrong: " << angle << endl; 
+            char release;
+            cin >> release;
+        }
+    
         //adds another elipse to the image to cover back of the ellipses
-        ellipse(frame, Point((canSize*1.7)/2, canSize/2), Size(canSize/6.5, canSize/6.5), 0, 180, 360, Scalar(255,0,0), FILLED, LINE_8);
+        ellipse(frame, Point((canSize*1.7)/2, canSize/2), Size(canSize/6.5, canSize/6.5), angle, 180, 360, Scalar(255,0,0), FILLED, LINE_8);
         
         //displays the image then waits 40 milliseconds
         imshow(windowName, frame);
