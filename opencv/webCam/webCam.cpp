@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     VideoCapture cap;
     int deviceID = 0;
     int apiID = cv::CAP_ANY;
-    cap.open(deviceID);
+    cap.open(deviceID + apiID);
 
     if (!cap.isOpened())
     {
