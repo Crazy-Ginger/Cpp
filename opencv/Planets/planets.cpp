@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 {
     random_device rd;
     default_random_engine rng(rd());
-    uniform_int_distribution <> aRand(-30, 30);
+    uniform_int_distribution <> aRand(-20, 20);
     uniform_int_distribution <> rCol(-11, 11);
     uniform_int_distribution <> gCol(-11, 11);
     uniform_int_distribution <> bCol(-8, 8);
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
     }
 
     //creates loop to allow oscilation
-    for (int j = 0; j < 100; j++)
+    for (;;)
     {
         //establishes all the image stuff such as planet and move the window
         Mat frame = Mat::zeros(canSize, canSize*1.7, CV_8UC3);
@@ -80,12 +80,12 @@ int main(int argc, char* argv[])
             lipses.at(i).addtoImg(frame);
             
             //checks if the lipses are at the max on min height and then if they're heading up or down and then increments or decrements the angle for the next frame
-            if (lipses.at(i).angle > 30)
+            if (lipses.at(i).angle > 20)
             {
                 lipses.at(i).angle--;
                 lipses.at(i).down =  true;
             }
-            else if (lipses.at(i).angle < -30)
+            else if (lipses.at(i).angle < -20)
             {
                 lipses.at(i).angle++;
                 lipses.at(i).down = false;
