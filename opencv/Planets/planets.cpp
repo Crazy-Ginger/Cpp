@@ -64,11 +64,11 @@ int main(int argc, char* argv[])
 
     for (int j = 0; j < 100; j++)
     {
-    Mat frame = Mat::zeros(canSize, canSize*1.7, CV_8UC3);
-    char windowName[] = "frame";
-    namedWindow(windowName);
-    moveWindow(windowName, 0, 0);
-    circle(frame, Point((canSize*1.7)/2, canSize/2), canSize/6, Scalar(255,0,0), FILLED, LINE_8);
+        Mat frame = Mat::zeros(canSize, canSize*1.7, CV_8UC3);
+        char windowName[] = "frame";
+        namedWindow(windowName);
+        moveWindow(windowName, 0, 0);
+        circle(frame, Point((canSize*1.7)/2, canSize/2), canSize/6, Scalar(255,0,0), FILLED, LINE_8);
         for (unsigned int i = 0; i < lipses.size(); i++)
         {
             lipses.at(i).addtoImg(frame);
