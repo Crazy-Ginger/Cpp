@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
-	int row;
-	cout << "Number of rows: "; cin >> row; cout << endl;
+	int row = atoi(argv[1]);
+	cout << "Number of rows: " << row << endl;
 	
-	int column;
-	cout << "Number of columns: "; cin >> column; cout << endl;
+	int column= atoi(argv[2]);
+	cout << "Number of columns: " << column << endl;
  	
 	// Create a vector of vector with size equal to row.
 	vector <vector<int>> vec(row); 
@@ -27,8 +27,8 @@ int main()
 		{
 		cout << i << "\t";
 		}
-	cout << endl;
-	for (int i = 0; i < row; i++) 
+	cout << endl << endl;
+	for (unsigned int i = 0; i < vec.size(); i++) 
 		{
 		for (unsigned int j = 0; j < vec[i].size(); j++)
 			{
@@ -36,7 +36,5 @@ int main()
 			}
 		cout << endl;
 		}
-	
-	char release;
-	cin >> release;
+    return 0;
 }
