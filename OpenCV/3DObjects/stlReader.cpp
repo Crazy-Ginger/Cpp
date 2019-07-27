@@ -20,15 +20,11 @@ class v3
 
 v3::v3(char* facet)
 {
+    char f1[4] = {facet[0],facet[1],facet[2],facet[3]};
 
-    char f1[4] = {facet[0],
-        facet[1],facet[2],facet[3]};
+    char f2[4] = {facet[4],facet[5],facet[6],facet[7]};
 
-    char f2[4] = {facet[4],
-        facet[5],facet[6],facet[7]};
-
-    char f3[4] = {facet[8],
-        facet[9],facet[10],facet[11]};
+    char f3[4] = {facet[8],facet[9],facet[10],facet[11]};
 
     float xx = *((float*) f1 );
     float yy = *((float*) f2 );
@@ -37,7 +33,6 @@ v3::v3(char* facet)
     m_x = double(xx);
     m_y = double(yy);
     m_z = double(zz);
-
 }
 
 
@@ -51,12 +46,11 @@ class tri
     ~tri();
 
     v3 m_p1, m_p2, m_p3;
-
 };
 
 
-void read_stl(string fname, vector <tri>&v){
-
+void read_stl(string fname, vector <tri>&v)
+{
     //!!
     //don't forget ios::binary
     //!!
@@ -75,6 +69,7 @@ void read_stl(string fname, vector <tri>&v){
     else
     {
         cout << "error" << endl;
+        return;
     }
 
     //read 4-byte ulong
@@ -87,6 +82,7 @@ void read_stl(string fname, vector <tri>&v){
     else
     {
         cout << "error" << endl;
+        return;
     }
 
     //now read in all the triangles
