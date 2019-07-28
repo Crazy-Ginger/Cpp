@@ -8,14 +8,12 @@ using namespace std;
 class v3
 {
     public:
+        v3();
+        v3(char* bin);
+        v3(double x, double y, double z);
+        ~v3();
 
-    v3();
-    v3(char* bin);
-    v3(double x, double y, double z);
-    ~v3();
-
-    double m_x, m_y, m_z;
-
+        double m_x, m_y, m_z;
 };
 
 v3::v3(char* facet)
@@ -39,13 +37,12 @@ v3::v3(char* facet)
 class tri
 {
     public:
+        tri();
+        tri(v3 p1, v3 p2, v3 p3);
+        void draw();
+        ~tri();
 
-    tri();
-    tri(v3 p1, v3 p2, v3 p3);
-    void draw();
-    ~tri();
-
-    v3 m_p1, m_p2, m_p3;
+        v3 m_p1, m_p2, m_p3;
 };
 
 
