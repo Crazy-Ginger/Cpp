@@ -26,31 +26,23 @@ class ball
             setCen(wCoord(rng), hCoord(rng));
 
             //should generate a random direction for the ball
-            uniform_int_distribution <> boolGen(0, 1);
-            if (boolGen(rng) == 0)
-            {
-                down = true;
-            }
-            else down = false;
-
-            if (boolGen(rng) == 0)
-            {
-                right = true;
-            }
-            else right = false;
+            uniform_int_distribution <> velGen(-10, 10);
+            xVel = velGen(rng);
+            yVel = velGen(rng);
         }
         Point centre;
         Scalar colour;
         int rad;
-        int xcoord, ycoord;
+        int xCoord, yCoord;
         bool right , down;
+        int xVel, yVel;
 
         //sets the centre of the object and assigns it to the variables
         void setCen(int x, int y)
         {
             centre = Point(x,y);
-            xcoord = x;
-            ycoord = y;
+            xCoord = x;
+            yCoord = y;
         }
         //sets the colour of the circle
         void setColour(int r, int g, int b)
@@ -63,42 +55,29 @@ class ball
             circle(img, centre, rad, colour, FILLED, LINE_8);
         }
         //checks the object isn't in a wall
-        void wallCol()
+        void wallCheck()
         {
-            if (rad + xcoord > width)
+            if (rad + xCoord > width)
             {
-                right = false;
+                xVel = -1 * xVel;
             }
-            if (rad + ycoord > height)
+            if (rad + yCoord > height)
             {
-                down = false;
+                yVel = -1*yVel;
             }
-            if (xcoord - rad < 0)
+            if (xCoord - rad < 0)
             {
-                right = true;
+                xVel = -1*xVel;
             }
-            if (ycoord - rad < 0)
+            if (yCoord - rad < 0)
             {
-                down = true;
+                yVel = -1*yVel;
             }
-
-            //int x = obj.xcoord, y = obj.ycoord;
-            if (!right)
-            {
-                setCen(--xcoord, ycoord);
-            }
-            if (!down)
-            {
-                setCen(xcoord, --ycoord);
-            }
-            if (down)
-            {
-                setCen(xcoord, ++ycoord);
-            }
-            if (right)
-            {
-                setCen(++xcoord, ycoord);
-            }
+        }
+        //moves the centre by the velocity of the ball
+        void move()
+        {
+            setCen(xCoord + xVel, yCoord + yVel);
         }
 };
 
@@ -132,7 +111,9 @@ int main(int argc, char* argv[])
 
         obj.addtoImg(canvas);
 
-        obj.wallCol();
+        //checks the ball isnt in a wall and then moves the ball for the next time
+        obj.wallCheck();
+        obj.move();
 
         imshow(name, canvas);
         waitKey(atoi(argv[4]));
