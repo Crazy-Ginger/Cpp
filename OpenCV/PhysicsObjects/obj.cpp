@@ -29,6 +29,7 @@ class ball
             uniform_int_distribution <> velGen(-10, 10);
             xVel = velGen(rng);
             yVel = velGen(rng);
+            cout << "xVel: " << xVel << "\tyVel: "<< yVel << endl;
         }
         Point centre;
         Scalar colour;
@@ -47,6 +48,7 @@ class ball
         //sets the colour of the circle
         void setColour(int r, int g, int b)
         {
+            //colour is (B, G, R)
             colour = Scalar(r, g, b);
         }
         //adds the object to the image
@@ -98,7 +100,7 @@ int main(int argc, char* argv[])
     //initialise physics object
     ball obj;
     obj.rad = rad;
-    obj.setColour(100, 150, 200);
+    obj.setColour(0, 255, 0);
 
     //infinite loop
     for (;;)
