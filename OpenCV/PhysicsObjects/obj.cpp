@@ -100,12 +100,12 @@ int main(int argc, char* argv[])
     //initialise physics object
     ball obj;
     obj.rad = rad;
-    obj.setColour(0, 255, 0);
+    obj.setColour(255, 255, 255);
 
     //infinite loop
     for (;;)
     {
-        //cout << "centre: " << obj.centre << endl;
+        //generates the mat and the window for the display image
         Mat canvas = Mat::zeros(height, width, CV_8UC3);
         char name[] = "frame";
         namedWindow(name);
