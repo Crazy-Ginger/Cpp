@@ -49,8 +49,11 @@ int main(int argc, char* argv[])
     else
     {
         cout << "Error inputs required\n";
+        cout << "Inputs need to be dimension of frame and choice of col or can\n";
         return 0;
     }
+
+
     transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
 
     //takes the user input size for the image
@@ -67,16 +70,18 @@ int main(int argc, char* argv[])
         newOne.setCentre(canSize/2, canSize/2);
         newOne.height = canSize/2 -20;
         newOne.width = canSize/8 -20;
-        if (choice != "cannied" || choice != "ca"){
+        if (choice != "cannied" || choice != "ca")
+        {
             newOne.colour = Scalar(coRand(rng), coRand(rng), coRand(rng));
         }
-        else{
+        else
+        {
             newOne.colour = Scalar(255, 255, 255);
         }
         lipses.push_back(newOne);
     }
     
-    
+   
     for (double i = 0; i < 360; i++)
     {
         //creates the basic frame that will contain the basic ellipes
@@ -93,12 +98,14 @@ int main(int argc, char* argv[])
             //adds the ellipse to the image
             lipses.at(j).addtoImg(coFrame);
             //adds to the angle for its next display time
-            lipses.at(j).angle += j/2 +1;
+            lipses.at(j).angle += j/4 +1;
         }
+
+
         if (choice == "colour" || choice == "co")
         {
             imshow(windowName, coFrame);
-            waitKey(40);
+            waitKey(10);
         }
         else
         {
@@ -115,9 +122,9 @@ int main(int argc, char* argv[])
             }
             else if (choice == "cannied" || choice == "ca")
             {
-                blur(gFrame, gFrame, Size(2,2));
+                //blur(gFrame, gFrame, Size(2,2));
                 //cannies the entire image and saves it as a new image mat
-                Canny(gFrame, caFrame, 10, 30, 5);
+                Canny(gFrame, caFrame, 100, 140, 5);
                 
                 imshow(windowName, caFrame);
                 waitKey(40);
