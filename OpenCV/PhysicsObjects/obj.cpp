@@ -31,6 +31,7 @@ class ball
             yVel = velGen(rng);
             cout << "xVel: " << xVel << "\tyVel: "<< yVel << endl;
         }
+        
         Point centre;
         Scalar colour;
         int rad;
@@ -83,6 +84,10 @@ class ball
         }
 };
 
+void ballCol(ball &obj1, ball &obj2)
+{
+
+}
 
 int main(int argc, char* argv[])
 {   
@@ -97,10 +102,15 @@ int main(int argc, char* argv[])
     width = atoi(argv[2]);
     int rad = atoi(argv[3]);
 
-    //initialise physics object
-    ball obj;
-    obj.rad = rad;
-    obj.setColour(255, 255, 255);
+    //initialise physics objects
+    vector <ball> balls;
+    for (int i = 0; i < 3; i++)
+    {
+        ball obj;
+        obj.rad = rad;
+        obj.setColour(255, 255, 255);
+        balls.push_back(obj);
+    }
 
     //infinite loop
     for (;;)
@@ -110,13 +120,15 @@ int main(int argc, char* argv[])
         char name[] = "frame";
         namedWindow(name);
         moveWindow(name, 0, 0);
-
-        obj.addtoImg(canvas);
+        
+        for (unsigned int i = 0; i < balls.size(); i++)
+        {
+            balls.at(i).addtoImg(canvas);
 
         //checks the ball isnt in a wall and then moves the ball for the next time
-        obj.wallCheck();
-        obj.move();
-
+            balls.at(i).wallCheck();
+            balls.at(i).move();
+        }
         imshow(name, canvas);
         waitKey(atoi(argv[4]));
     }
