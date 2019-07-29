@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+//for random generation
 #include <random>
 #include <time.h>
 
@@ -11,6 +11,7 @@
 using namespace std;
 using namespace cv;
 
+//variables used globally
 int width, height;
 
 class ball
@@ -24,6 +25,9 @@ class ball
             uniform_int_distribution <> wCoord(width/5, 4*(width/5));
             uniform_int_distribution <> hCoord(height/5, 4*(height/5));
             setCen(wCoord(rng), hCoord(rng));
+
+            uniform_int_distribution <> colours(0,255);
+            setColour(colours(rng), colours(rng), colours(rng));
 
             //should generate a random direction for the ball
             uniform_int_distribution <> velGen(-10, 10);
@@ -102,13 +106,12 @@ int main(int argc, char* argv[])
     width = atoi(argv[2]);
     int rad = atoi(argv[3]);
 
-    //initialise physics objects
+    //initialise physics objects & adds them to vector
     vector <ball> balls;
     for (int i = 0; i < 3; i++)
     {
         ball obj;
         obj.rad = rad;
-        obj.setColour(255, 255, 255);
         balls.push_back(obj);
     }
 
