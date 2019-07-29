@@ -90,7 +90,8 @@ class ball
 
 void ballCol(ball &obj1, ball &obj2)
 {
-
+    //toDo: as circles can interset each other at anlges other than 90 then the collision detection should go round each circle and search for a collision this will also impact the final vector of the each balls movement as it will allow them to bounce in more directions
+    //Perhaps adding mass and momentum to each ball could be necessary/make coding easier?
 }
 
 int main(int argc, char* argv[])
