@@ -12,14 +12,13 @@ int main()
     namedWindow(winName);
     moveWindow(winName, 0, 0);
 
-    for (int i = -1; i < 10; i++)
-    {
-        Mat image = Mat::zeros(700, 700, CV_8UC3);
-        circle(image, Point(350,350), 80, Scalar(255,255,255), i, LINE_8);
-        string text = to_string(i);
-        putText(image, text, Point (100, 100), 20, 1, Scalar(200,200,200)); 
-        imshow(winName, image);
-        waitKey(0);
-    }
+    Mat image = Mat::zeros(700, 700, CV_8UC3);
+    circle(image, Point(350,350), 80, Scalar(255,0, 0), 1, LINE_4);
+
+    circle(image, Point(350,350), 82, Scalar(0,0,255), 1, LINE_8);
+    //string text = to_string(i);
+    //putText(image, text, Point (100, 100), 20, 1, Scalar(200,200,200)); 
+    imshow(winName, image);
+    waitKey(0);
     return 0;
 }
