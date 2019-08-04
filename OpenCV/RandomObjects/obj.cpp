@@ -34,9 +34,9 @@ int main(int argc, char* argv[])
     uniform_int_distribution <> objNum(dim*2, dim*10);
     uniform_int_distribution <> randObj(0, 10);
     
-    height = dim; width = dim;
+    height = dim; width = dim*1.77;
 
-    Mat coFrame = Mat::zeros(dim, dim, CV_8UC3);
+    Mat coFrame = Mat::zeros(height, width, CV_8UC3);
     char windowName[] = "random image";
     string choice = argv[2];
     transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     namedWindow(windowName);
     moveWindow(windowName, 0, 0);
 
-    for (unsigned int i = 0; i < objNum(rng); i++)
+    for (int i = 0; i < objNum(rng); i++)
     {
         unsigned int randNum = randObj(rng);
         if  (randNum == 2)
