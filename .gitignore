@@ -12,7 +12,7 @@
 !*.txt
 !*.py
 
-#Ignores Testing
+#Ignores Testing and make files
 Testing.cpp
 CMakeFiles
 CMakeCache.txt
