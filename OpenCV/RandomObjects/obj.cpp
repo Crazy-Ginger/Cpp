@@ -12,31 +12,28 @@ using namespace cv;
 
 int height, width;
 
-class ellipses
-{
-    public:
-        ellipses(Mat img)
-        {
-            random_device rd;
-            default_random_engine rng(rd());
-            uniform_int_distribution <> rColour(0, 255);
-            uniform_int_distribution <> lineThick(-1, 20);
-            uniform_int_distribution <> centre(0, width);
-            uniform_int_distribution <> angles(0, 360);
-
-            
-        }
-};
-
-int main(int argc, char* argv[])
+void ellipseAdd(Mat img)
 {
     random_device rd;
     default_random_engine rng(rd());
-    uniform_int_distribution <> rColour(0, 255);
-    uniform_int_distribution <> objNum(700, 7000);
-    uniform_int_distribution <> dic();
-    
+    uniform_int_distribution <> rCol(0, 255);
+    uniform_int_distribution <> linTh(-1, 10);
+    uniform_int_distribution <> centre(0, width);
+    uniform_int_distribution <> ang(0, 360);
+    uniform_int_distribution <> rDims(1, width);
+
+    ellipse(img, Point(centre(rng),centre(rng)), Size(rDims(rng),rDims(rng)), ang(rng), ang(rng), ang(rng), Scalar(rCol(rng),rCol(rng),rCol(rng)), linTh(rng), 4);
+}
+
+
+int main(int argc, char* argv[])
+{
     int dim = atoi(argv[1]);
+    random_device rd;
+    default_random_engine rng(rd());
+    uniform_int_distribution <> objNum(dim*2, dim*10);
+    uniform_int_distribution <> randObj(0, 10);
+    
     height = dim; width = dim;
 
     Mat coFrame = Mat::zeros(dim, dim, CV_8UC3);
@@ -47,14 +44,40 @@ int main(int argc, char* argv[])
     namedWindow(windowName);
     moveWindow(windowName, 0, 0);
 
-    if (choice == "g" || choice == "gr")
+    for (unsigned int i = 0; i < objNum(rng); i++)
+    {
+        unsigned int randNum = randObj(rng);
+        if  (randNum == 2)
+        {
+            ellipseAdd(coFrame);
+        }
+
+    }
+
+    if (choice == "colour" || choice == "co")
+    {
+        imshow(windowName, coFrame);
+    }
+    else
     {
         Mat gFrame;
+        cvtColor(coFrame, gFrame, COLOR_BGR2GRAY);
+
+        if (choice == "ca" || choice == "cannied")
+        {
+            Mat caFrame;
+            Canny(gFrame, caFrame, 50, 150, 5);
+            imshow(windowName, caFrame);
+        }
+        else if (choice == "g" || choice == "gr")
+        {
+            imshow(windowName, gFrame);
+        }
+        else
+        {
+            cout << "Error\n";
+        }
     }
-    else if (choice == "ca" || choice == "cannied")
-    {
-        Mat gFrame, caFrame;
-    }
-    
+    waitKey(0);
     return 0;
 }
