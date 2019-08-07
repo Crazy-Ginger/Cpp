@@ -5,8 +5,8 @@
 #include <algorithm>
 using namespace std;
 
-vector<int> primes(1000000000);
-vector <bool> primeCheck(1000000001);
+vector<int> primes(100000000);
+vector <bool> primeCheck(100000001);
 
 
 vector<int> primeSieve(vector <int> vect)
@@ -136,7 +136,7 @@ int main()
     }
     cout << "done the primes\n";
     vector <long> checkNums;
-    for (unsigned int i = 0; i < 2000; i++)
+    for (unsigned int i = 0; i < 20000000; i++)
     {
         string base = to_string(i);
         for (int j = base.size(); j >= 0; j--)
