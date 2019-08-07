@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
     //checks for the correct number of inputs
     if (argc != 5)
     {
-        cout << "Inputs required\n1st Window Height\n2nd Window width\n3rd Circle radius\n4th Speed\n";
+        cout << "Inputs required\n1st Window Height\n2nd Window width\n3rd Circle radius\n4th Number of balls\n";
         return -1;
     }
 
@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
 
     //initialise physics objects & adds them to vector
     vector <ball> balls;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < atoi(argv[4]); i++)
     {
         ball obj;
         obj.rad = rad;
@@ -134,7 +134,7 @@ int main(int argc, char* argv[])
             balls.at(i).move();
         }
         imshow(name, canvas);
-        waitKey(atoi(argv[4]));
+        waitKey(50);
     }
     return 0;
 }
