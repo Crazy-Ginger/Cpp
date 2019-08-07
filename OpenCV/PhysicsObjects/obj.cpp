@@ -133,6 +133,13 @@ int main(int argc, char* argv[])
             balls.at(i).wallCheck();
             balls.at(i).move();
         }
+
+        //to canny the frames
+        //Mat caFrame;
+        //cvtColor(canvas, caFrame, COLOR_BGR2GRAY);
+        //Canny(caFrame, caFrame, 50, 150);
+        //imshow(name, caFrame);
+
         imshow(name, canvas);
         waitKey(50);
     }
