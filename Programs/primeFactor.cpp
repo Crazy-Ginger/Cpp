@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <math.h>
+#include <cmath>
 using namespace std;
 
 vector<int> primes;
 int depth = 0;
+
 vector<int> primeSieve(vector <int> initial)
 {
     vector<int>::iterator start = initial.begin();
@@ -118,6 +119,5 @@ int main(int argc, char* argv[])
 
     }
     cout << endl;
-   
     return 0;
 }

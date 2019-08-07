@@ -3,7 +3,7 @@
 using namespace std;
 
 int main()
-	{
+{
 	string toRev;
 	getline(cin, toRev);
 	
@@ -17,4 +17,4 @@ int main()
 	char release;
 	cin >> release;
 	return 0;
-	}
+}

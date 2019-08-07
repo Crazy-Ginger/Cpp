@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 //for random generation
 #include <random>
 #include <time.h>
@@ -50,17 +51,20 @@ class ball
             xCoord = x;
             yCoord = y;
         }
+        
         //sets the colour of the circle
         void setColour(int r, int g, int b)
         {
             //colour is (B, G, R)
             colour = Scalar(r, g, b);
         }
+        
         //adds the object to the image
         void addtoImg(Mat img)
         {
             circle(img, centre, rad, colour, FILLED, LINE_8);
         }
+        
         //checks the object isn't in a wall
         void wallCheck()
         {
@@ -81,6 +85,7 @@ class ball
                 yVel = -1*yVel;
             }
         }
+        
         //moves the centre by the velocity of the ball
         void move()
         {
