@@ -135,6 +135,7 @@ int main()
         primeCheck.at(*i) = true;
     }
     cout << "done the primes\n";
+
     vector <long> checkNums;
     for (unsigned int i = 0; i < 20000000; i++)
     {
@@ -149,6 +150,7 @@ int main()
     }
     sort(checkNums.begin(), checkNums.end());
     cout << "made numbers\n";
+
 
     for (unsigned int i = 0; i < checkNums.size(); i++)
     {

@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
     int itter = 0;
     int canSize = atoi(argv[1]);
     double rad = canSize/2.7, ang = atof(argv[3]);
-    double height = abs(cos(3.14/ang)*rad);
+    //double height = abs(cos(3.14/ang)*rad);
 
     //establishes vector of ellipses that slowly increase in size to create the ring look
     vector <movLipse> lipses;
@@ -55,15 +55,18 @@ int main(int argc, char* argv[])
         newOne.thickness = 1;
         newOne.setCentre(canSize/2, (canSize*1.7)/2);
         newOne.width = rad +itter;
-        newOne.height = height + cos(3.14/ang)*itter;
+        newOne.height = (rad+itter)*abs(cos(ang));
+        //newOne.width = rad +itter;
+        //newOne.height = height + cos(3.14/ang)*itter;
         newOne.colour = Scalar(rCol(rng)+29, gCol(rng)+27, bCol(rng)+20);
         lipses.push_back(newOne);
         itter += 1;
     }
 
     bool down = true;
-    int angle = aRand(rng);
+    int rAngle = aRand(rng), angSpeed = 3;
     //creates loop to allow oscilation
+    itter = 1;
     for (;;)
     {
         //establishes all the image stuff such as planet and move the window
@@ -77,40 +80,47 @@ int main(int argc, char* argv[])
         for (unsigned int i = 0; i < lipses.size(); i++)
         {
             //adds the lipses to the image
-            lipses.at(i).addtoImg(frame, angle);
+            lipses.at(i).addtoImg(frame, rAngle);
         } 
         //checks if the lipses are at the max on min height and then if they're heading up or down and then increments or decrements the angle for the next frame
-        if (angle > 20)
-        {
-            angle--;
-            down =  true;
-        }
-        else if (angle < -20)
-        {
-            angle++;
-            down = false;
-        }
-        else if (down)
-        {
-            angle--;
-        }
-        else if (!down)
-        {
-            angle++;
-        }
-        else
-        {
-            cout << "um... something gone wrong: " << angle << endl; 
-            char release;
-            cin >> release;
-        }
+        //if (rAngle > 20)
+        //{
+            //rAngle--;
+            //down =  true;
+        //}
+        //else if (rAngle < -20)
+        //{
+            //rAngle++;
+            //down = false;
+        //}
+        //else if (down)
+        //{
+            //rAngle--;
+        //}
+        //else if (!down)
+        //{
+            //rAngle++;
+        //}
+        //else
+        //{
+            //cout << "um... something gone wrong: " << rAngle << endl; 
+            //char release;
+            //cin >> release;
+        //}
+
+        rAngle = cos(0.09*itter) - cos(0.09*(itter+1));
     
         //adds another elipse to the image to cover back of the ellipses
-        ellipse(frame, Point((canSize*1.7)/2, canSize/2), Size(canSize/6.5, canSize/6.5), angle, 180, 360, Scalar(255,0,0), FILLED, LINE_8);
+        ellipse(frame, Point((canSize*1.7)/2, canSize/2), Size(canSize/6.5, canSize/6.5), rAngle, 180, 360, Scalar(255,0,0), FILLED, LINE_8);
         
         //displays the image then waits 40 milliseconds
         imshow(windowName, frame);
         waitKey(60);
+        if (rAngle == 0)
+        {
+            itter =0;
+        }
+        itter++;
     }
     return 1;
 }
