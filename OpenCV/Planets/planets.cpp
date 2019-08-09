@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
         waitKey(60);
         if (rAngle == 0)
         {
-            itter =0;
+            itter = 0;
         }
         itter++;
     }
