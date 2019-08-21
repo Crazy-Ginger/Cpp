@@ -49,9 +49,9 @@ int main(int argc, char* argv[])
     //double height = abs(cos(3.14/ang)*rad);
 
     //establishes vector of ellipses that slowly increase in size to create the ring look
-    vector <movLipse> lipses;
+    vector <movLipse> rings;
     for (int i = 0; i < atoi(argv[2]); i++)
-    {
+   {
         movLipse newOne;
         newOne.thickness = 1;
         newOne.setCentre(canSize/2, (canSize*1.7)/2);
@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
         //newOne.width = rad +itter;
         //newOne.height = height + cos(3.14/ang)*itter;
         newOne.colour = Scalar(bCol(rng)+20, gCol(rng)+27, rCol(rng)+29);
-        lipses.push_back(newOne);
+        rings.push_back(newOne);
         itter += 1;
     }
 
@@ -71,40 +71,45 @@ int main(int argc, char* argv[])
     int rAngle;
     for (;;)
     {
+        //sets the new angle of the rings
         rAngle = 20 * cos(doubItter);
 
-        //establishes all the image details such as planet and moves the window
+        //establishes all the image details and moves the window
         Mat frame = Mat::zeros(canSize, canSize*1.7, CV_8UC3);
-        //string windowName = to_string(rAngle);
         char windowName[] = "frame";
         namedWindow(windowName);
         moveWindow(windowName, 0, 0);
+
+        //adds a blue circle to the image to represent the planet
+        //could do more such as add rings onto planet using ellipses
         circle(frame, Point((canSize*1.7)/2, canSize/2), canSize/6.5, Scalar(255,0,0), FILLED, LINE_8);
         
         //adds all the ellipses to the image
-        for (unsigned int i = 0; i < lipses.size(); i++)
+        for (unsigned int i = 0; i < rings.size(); i++)
         {
             //adds the lipses to the image
-            lipses.at(i).addtoImg(frame, rAngle);
+            rings.at(i).addtoImg(frame, rAngle);
         } 
 
         //adds another elipse to the image to cover back of the ellipses
+        //this causes the edge of the planet to move for some reason, probs to do with the way shapes are drawn
         ellipse(frame, Point((canSize*1.7)/2, canSize/2), Size(canSize/6.5, canSize/6.5), rAngle, 180, 360, Scalar(255,0,0), FILLED, LINE_8);
         
-        //displays the image then waits 40 milliseconds
+        //displays the image then waits 10 milliseconds, changed to when moved to using trig to change angle
         imshow(windowName, frame);
         waitKey(10);
 
+        //itterates the angle by increasing an approx in radians
         if (doubItter > 3.141*2)
         {
+            //set above 0 to avoid bouncing error
             doubItter = 0.04;
-            //cout << "reset doubItter\n";
         }
         else 
         {
+            //increases the angle to make the rings appear to move, incorrect but a decent approx for now
             doubItter += 0.04;
         }
-        //cout << "doubItter: " << doubItter << endl;
     }
     return 1;
 }
