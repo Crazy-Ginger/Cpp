@@ -67,7 +67,6 @@ int main(int argc, char* argv[])
     //bool down = true;
     //angSpeed = 3;
     //creates loop to allow oscilation
-    itter = 1;
     double doubItter = 0;
     int rAngle;
     for (;;)
@@ -96,14 +95,14 @@ int main(int argc, char* argv[])
         imshow(windowName, frame);
         waitKey(10);
 
-        if (doubItter >= 3.14*2)
+        if (doubItter > 3.141*2)
         {
-            doubItter = 0;
+            doubItter = 0.04;
             //cout << "reset doubItter\n";
         }
         else 
         {
-            doubItter += 0.01;
+            doubItter += 0.04;
         }
         //cout << "doubItter: " << doubItter << endl;
     }
