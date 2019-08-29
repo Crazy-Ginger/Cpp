@@ -13,7 +13,7 @@ int main()
     moveWindow(winName, 0, 0);
 
     Mat image = Mat::zeros(700, 700, CV_8UC3);
-    circle(image, Point(350,350), 80, Scalar(0,0,255), 1, LINE_4);
+    circle(image, Point(700,700), 80, Scalar(0,0,255), 1, LINE_4);
 
     imshow(winName, image);
     waitKey(0);
