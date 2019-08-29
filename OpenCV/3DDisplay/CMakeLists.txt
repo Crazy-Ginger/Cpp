@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.8)
+project(3DDisplay)
+find_package( OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+add_executable(obj 3DPolarObj.cpp)
+target_link_libraries(3DDisplay ${OpenCV_LIBS})
