@@ -66,30 +66,39 @@ class ball
         }
         
         //checks the object isn't in a wall
-        void wallCheck()
+        void movement()
         {
-            if (rad + xCoord > width)
-            {
-                xVel = -1 * xVel;
-            }
-            if (rad + yCoord > height)
-            {
-                yVel = -1*yVel;
-            }
-            if (xCoord - rad < 0)
-            {
-                xVel = -1*xVel;
-            }
-            if (yCoord - rad < 0)
-            {
-                yVel = -1*yVel;
-            }
-        }
+            int xTDist = (width - rad) - (xCoord+xVel);
+            int yTDist = (height - rad) - (yCoord+yVel);
+            int xBDist = (xCoord+xVel) - (rad);
+            int yBDist = (yCoord+yVel) - (rad);
         
-        //moves the centre by the velocity of the ball
-        void move()
-        {
-            setCen(xCoord + xVel, yCoord + yVel);
+            if (xTDist < 0)
+            {
+                xCoord += xTDist - xVel;
+                xVel *= -1;
+            }
+            if (yTDist < 0) 
+            {
+                yCoord += yTDist - yVel;
+                yVel *= -1;
+            }
+            if (xBDist < 0)
+            {
+                xCoord += xBDist - xVel;
+                xVel *= -1;
+            }
+            if (yBDist < 0)
+            {
+                yCoord += yBDist - yVel;
+                yVel *= -1;
+            }
+            else
+            {
+                xCoord += xVel;
+                yCoord += yVel;
+            }
+            setCen(xCoord, yCoord);
         }
 };
 
@@ -97,6 +106,7 @@ void ballCol(ball &obj1, ball &obj2)
 {
     //toDo: as circles can interset each other at anlges other than 90 then the collision detection should go round each circle and search for a collision this will also impact the final vector of the each balls movement as it will allow them to bounce in more directions
     //Perhaps adding mass and momentum to each ball could be necessary/make coding easier?
+
 }
 
 int main(int argc, char* argv[])
@@ -135,8 +145,7 @@ int main(int argc, char* argv[])
             balls.at(i).addtoImg(canvas);
 
         //checks the ball isnt in a wall and then moves the ball for the next time
-            balls.at(i).wallCheck();
-            balls.at(i).move();
+            balls.at(i).movement();
         }
 
         //to canny the frames
