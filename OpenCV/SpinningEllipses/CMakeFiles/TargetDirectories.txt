@@ -1,3 +1,0 @@
-/home/becca/Documents/Source/Cpp/OpenCV/MovingEllipses/CMakeFiles/rebuild_cache.dir
-/home/becca/Documents/Source/Cpp/OpenCV/MovingEllipses/CMakeFiles/ellipse.dir
-/home/becca/Documents/Source/Cpp/OpenCV/MovingEllipses/CMakeFiles/edit_cache.dir

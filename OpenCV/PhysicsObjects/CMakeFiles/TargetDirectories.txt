@@ -1,3 +1,0 @@
-/home/becca/Documents/Source/Cpp/OpenCV/PhysicsObjects/CMakeFiles/rebuild_cache.dir
-/home/becca/Documents/Source/Cpp/OpenCV/PhysicsObjects/CMakeFiles/obj.dir
-/home/becca/Documents/Source/Cpp/OpenCV/PhysicsObjects/CMakeFiles/edit_cache.dir

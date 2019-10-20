@@ -1,3 +1,0 @@
-/home/becca/Documents/Source/Cpp/OpenCV/TestBed/CMakeFiles/rebuild_cache.dir
-/home/becca/Documents/Source/Cpp/OpenCV/TestBed/CMakeFiles/testImage.dir
-/home/becca/Documents/Source/Cpp/OpenCV/TestBed/CMakeFiles/edit_cache.dir

@@ -1,3 +1,0 @@
-/home/becca/Documents/Source/Cpp/OpenCV/Planets/CMakeFiles/rebuild_cache.dir
-/home/becca/Documents/Source/Cpp/OpenCV/Planets/CMakeFiles/planets.dir
-/home/becca/Documents/Source/Cpp/OpenCV/Planets/CMakeFiles/edit_cache.dir

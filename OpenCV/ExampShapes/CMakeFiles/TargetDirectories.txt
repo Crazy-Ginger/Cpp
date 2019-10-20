@@ -1,3 +1,0 @@
-/home/becca/Documents/Source/Cpp/OpenCV/ExampShapes/CMakeFiles/rebuild_cache.dir
-/home/becca/Documents/Source/Cpp/OpenCV/ExampShapes/CMakeFiles/shapes.dir
-/home/becca/Documents/Source/Cpp/OpenCV/ExampShapes/CMakeFiles/edit_cache.dir
