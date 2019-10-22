@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(3DObjects)
-find_package(OpenCV PATHS /usr/local/include/lib/cmake NO_DEFAULT_PATH)
-find_package( OpenCV REQUIRED)
+#find_package( OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(objects objects.cpp)
 target_link_libraries(objects ${OpenCV_LIBS})

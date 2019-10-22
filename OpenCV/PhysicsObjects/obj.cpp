@@ -111,7 +111,7 @@ void ballCol(ball &obj1, ball &obj2)
 
 int main(int argc, char* argv[])
 {   
-    //checks for the correct number of inputs
+    //checks for the correct number of inputs (adding compile test)
     if (argc != 5)
     {
         cout << "Inputs required\n1st Window Height\n2nd Window width\n3rd Circle radius\n4th Number of balls\n";
