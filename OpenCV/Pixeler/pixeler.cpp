@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <cmath>
 
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
@@ -28,7 +30,8 @@ int getBlock(Mat img, int widths, int height, int blockW, int blockH, int channe
             total += img.at<Vec3b>(height+y, widths+x)[channel];
         }
     }
-    int average = (total / (blockH * blockW));
+    int area = blockH * blockW;
+    int average = (total / area);
     return average;
 }
 
@@ -46,11 +49,11 @@ int main(int argc, char* argv[])
     
     Mat img;
     img = imread(argv[3], IMREAD_COLOR);
-    //if (!img.data)
-    //{
-        //cout << "Error couldn't read the file\n";
-        //return 1;
-    //}
+    if (!img.data)
+    {
+        cout << "Error couldn't read the file\n";
+        return 1;
+    }
     int height = img.rows;
     int widths = img.cols;
     
@@ -67,14 +70,24 @@ int main(int argc, char* argv[])
         }
     }
 
-    char winName[] = "image";
-    namedWindow(winName, WINDOW_AUTOSIZE);
-    moveWindow(winName, 0, 0);
 
-    //imshow(winName, img);
-    //waitKey(0);
-    imshow(winName, newImg);
-    waitKey(0);
-    imwrite("wtest.png", newImg);
+    if (argc == 5)
+    {
+        string fileName(argv[4]);
+        fileName += ".png";
+        imwrite(fileName, newImg);
+    }
+    else
+    {
+        char winName[] = "image";
+        namedWindow(winName, WINDOW_AUTOSIZE);
+        moveWindow(winName, 0, 0);
+
+        //imshow(winName, img);
+        //waitKey(0);
+        imshow(winName, newImg);
+        waitKey(0);
+        imwrite("wtest.png", newImg);
+    }
     return 0;
 }
