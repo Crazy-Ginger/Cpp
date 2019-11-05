@@ -37,15 +37,8 @@ int getBlock(Mat img, int widths, int height, int blockW, int blockH, int channe
 
 int main(int argc, char* argv[])
 {
-    //if (argc != 4)
-    //{
-        //cout << "Input's required:\n1.Pixelating block Height\n2.Pixelating block Width\n";
-    //}
-
     int blockH = stoi(argv[1]);
     int blockW = stoi(argv[2]);
-    
-    //cout << argv[3] << endl;
     
     Mat img;
     img = imread(argv[3], IMREAD_COLOR);
@@ -65,6 +58,7 @@ int main(int argc, char* argv[])
         {
             for (int k = 0; k < 3; k++)
             {
+                //gets the average of the pixel block and then sets all the pixels in that block to that value
                 setBlock(getBlock(img, x, y, blockW, blockH, k), x, y, blockW, blockH, k, newImg);
             }
         }
