@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
     if (!img.data)
     {
         cout << "Error couldn't read the file\n";
-        return 1;
+        return 2;
     }
     int height = img.rows;
     int widths = img.cols;
@@ -63,8 +63,8 @@ int main(int argc, char* argv[])
             }
         }
     }
-
-
+    cout << "Old value: " << img.at<Vec3b>(100,100) << endl;
+    cout << "New value: " << newImg.at<Vec3b>(100,100) << endl;
     if (argc == 5)
     {
         string fileName(argv[4]);
@@ -77,8 +77,8 @@ int main(int argc, char* argv[])
         namedWindow(winName, WINDOW_AUTOSIZE);
         moveWindow(winName, 0, 0);
 
-        //imshow(winName, img);
-        //waitKey(0);
+        imshow(winName, img);
+        waitKey(0);
         imshow(winName, newImg);
         waitKey(0);
         imwrite("wtest.png", newImg);
