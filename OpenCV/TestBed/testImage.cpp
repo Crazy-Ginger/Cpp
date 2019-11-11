@@ -4,14 +4,9 @@ using namespace std;
 int main()
 {
     int total = 5333;
-    int length = 5;
-    int width = 10;
-    int area = length*width;
-    int average = total/area;
-
-    cout << "average= " << total << "/" << area << endl;
-    cout << "average: " << average << endl;
-    
+    cout << total << "/5\n";
+    cout << total/5 << endl;
+    cout << (total/5)*5 << endl;
     return 0;
 }
 

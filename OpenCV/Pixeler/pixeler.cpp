@@ -15,7 +15,7 @@ void setBlock(int value, int startW, int startH, int blockW, int blockH, int cha
     {
         for (int h = 0; h < blockH; h++)
         {
-            img.at<Vec3b>(startH+h, startW+w)[channel] = value;
+            img.at<Vec3b>(startH+h, startW+w)[channel] = value/2;
         }
     }
 }
@@ -47,9 +47,10 @@ int main(int argc, char* argv[])
         cout << "Error couldn't read the file\n";
         return 2;
     }
-    int height = img.rows;
-    int widths = img.cols;
-    
+
+    int height = (img.rows/blockH)*blockH;
+    int widths = (img.cols/blockW)*blockW;
+
     Mat newImg = Mat(height, widths, CV_8UC3, Scalar(0,0,0));
 
     for(int x = 0; x < widths - blockW; x+= blockW)
