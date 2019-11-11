@@ -20,7 +20,7 @@ void setBlock(int value, int startW, int startH, int blockW, int blockH, int cha
     }
 }
 
-int getBlock(Mat img, int widths, int height, int blockW, int blockH, int channel)
+int getAverage(Mat img, int widths, int height, int blockW, int blockH, int channel)
 {
     int total = 0;
     for (int x = 0; x < blockW; x++)
@@ -35,13 +35,40 @@ int getBlock(Mat img, int widths, int height, int blockW, int blockH, int channe
     return average;
 }
 
+int getBrightest(Mat img, int widths, int height, int blockW, int blockH, int channel)
+{
+    int brightest = 0;
+    for (int x = 0; x < blockW; x++)
+    {
+        for (int y =0;y < blockW; y++)
+        {
+
+            int current = img.at<Vec3b>(height+y, widths+x)[channel];
+            if (current > brightest)
+            {
+                brightest = current;
+            }
+        }
+    }
+    return brightest;
+}
+
+
 int main(int argc, char* argv[])
 {
+    /*
+    argv[0]: program name (e.g. "pixeler")
+    argv[1]: the height of pixelating blocks (in pixels)
+    argv[2]: the width of pixelating blocks (in pixels) 
+    argv[3]: whether the image will use the brightest value or average (1 for bright anything else for average)
+    argv[4]: the image to be pixelated
+    argv[5] (optional): output file name (will be a png) without this the program just displays the image for the viewer
+     */
     int blockH = stoi(argv[1]);
     int blockW = stoi(argv[2]);
     
     Mat img;
-    img = imread(argv[3], IMREAD_COLOR);
+    img = imread(argv[4], IMREAD_COLOR);
     if (!img.data)
     {
         cout << "Error couldn't read the file\n";
@@ -59,16 +86,22 @@ int main(int argc, char* argv[])
         {
             for (int k = 0; k < 3; k++)
             {
+              if (stoi(argv[3]) == 1)
+              {
+                    setBlock(getBrightest(img, x, y, blockW, blockH, k), x, y, blockW, blockH, k, newImg);
+              }
+              else
+              {
                 //gets the average of the pixel block and then sets all the pixels in that block to that value
-                setBlock(getBlock(img, x, y, blockW, blockH, k), x, y, blockW, blockH, k, newImg);
+                    setBlock(getAverage(img, x, y, blockW, blockH, k), x, y, blockW, blockH, k, newImg);
+              }
             }
         }
     }
-    cout << "Old value: " << img.at<Vec3b>(100,100) << endl;
-    cout << "New value: " << newImg.at<Vec3b>(100,100) << endl;
-    if (argc == 5)
+
+    if (argc >= 6)
     {
-        string fileName(argv[4]);
+        string fileName(argv[5]);
         fileName += ".png";
         imwrite(fileName, newImg);
     }
