@@ -25,7 +25,7 @@ int getAverage(Mat img, int widths, int height, int blockW, int blockH, int chan
     int total = 0;
     for (int x = 0; x < blockW; x++)
     {
-        for (int y =0;y < blockW; y++)
+        for (int y =0;y < blockH; y++)
         {
             total += img.at<Vec3b>(height+y, widths+x)[channel];
         }
@@ -40,7 +40,7 @@ int getBrightest(Mat img, int widths, int height, int blockW, int blockH, int ch
     int brightest = 0;
     for (int x = 0; x < blockW; x++)
     {
-        for (int y =0;y < blockW; y++)
+        for (int y =0;y < blockH; y++)
         {
 
             int current = img.at<Vec3b>(height+y, widths+x)[channel];
@@ -64,11 +64,18 @@ int main(int argc, char* argv[])
     argv[4]: the image to be pixelated
     argv[5] (optional): output file name (will be a png) without this the program just displays the image for the viewer
      */
+
+    if (argc < 5)
+    {
+        cout << "Error not enought arguments\n";
+        return 2;
+    }
     int blockH = stoi(argv[1]);
     int blockW = stoi(argv[2]);
     
     Mat img;
     img = imread(argv[4], IMREAD_COLOR);
+    
     if (!img.data)
     {
         cout << "Error couldn't read the file\n";
@@ -102,7 +109,7 @@ int main(int argc, char* argv[])
     if (argc >= 6)
     {
         string fileName(argv[5]);
-        fileName += ".png";
+        //fileName += ".png";
         imwrite(fileName, newImg);
     }
     else
