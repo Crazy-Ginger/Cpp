@@ -15,7 +15,15 @@ void setBlock(int value, int startW, int startH, int blockW, int blockH, int cha
     {
         for (int h = 0; h < blockH; h++)
         {
-            img.at<Vec3b>(startH+h, startW+w)[channel] = value/2;
+            if (value > 255)
+            {
+                value = 255;
+            }
+            else if (value < 0)
+            {
+                value = 0;
+            }
+            img.at<Vec3b>(startH+h, startW+w)[channel] = value;
         }
     }
 }

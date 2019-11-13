@@ -21,18 +21,18 @@ int main(int argc, char* argv[])
     {
         for (int y = 0; y < img.rows; y++)
         {
-           for (uint i = 0; i < sizeof(totals); i++)
+           for (uint i = 0; i < 3; i++)
            {
                totals[i] += img.at<Vec3b>(y, x)[i];
            }
 
         }
     }
-    cout << "Totols: \n";
-    for (uint i = 0; i < sizeof(totals); i++)
+    cout << "Totals: \n";
+    for (uint i = 0; i < 3; i++)
     {
         cout << totals[i] << endl;
+        cout << "Average: " << totals[i]/(img.cols*img.rows) << endl;
     }
     return 0;
 }
-
