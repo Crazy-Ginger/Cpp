@@ -41,23 +41,24 @@ int main(int argc, char* argv[])
     uniform_int_distribution <> aRand(5, 180);
     uniform_int_distribution <> coRand(0, 255);
     
-    string choice = "";
+    string choice;
+    int canSize;
     if (argc > 1)
     {
-        choice = argv[2];
+        choice =  argv[1];
+
+        //takes the user input size for the image
+        canSize = atoi(argv[2]);
     }
     else
     {
         cout << "Error inputs required\n";
-        cout << "Inputs need to be dimension of frame and choice of col or can\n";
+        cout << "Inputs needed:\n1) choice of col\n2) dimension of frame\n";
         return 0;
     }
 
-
     transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
 
-    //takes the user input size for the image
-    int canSize = atoi(argv[1]);
     //creates a vector of the lipses class to allow many to be displayed
     vector <movLipse> lipses;
 
@@ -80,7 +81,7 @@ int main(int argc, char* argv[])
         }
         lipses.push_back(newOne);
     }
-    
+    cout << "Added ellipses\n";
    
     for (double i = 0; i < 360; i++)
     {
