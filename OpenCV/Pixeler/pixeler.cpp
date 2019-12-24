@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
     argv[2]: the width of pixelating blocks (in pixels) 
     argv[3]: whether the image will use the brightest value or average (1 for bright anything else for average)
     argv[4]: the image to be pixelated
-    argv[5] (optional): output file name (will be a png) without this the program just displays the image for the viewer
+    argv[5] (optional): output file name without this the program just displays the image for the viewer
      */
 
     if (argc < 5)
