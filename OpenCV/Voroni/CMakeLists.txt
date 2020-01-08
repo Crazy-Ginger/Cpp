@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project(voroni)
+#find_package(OpenCV PATHS /usr/local/include/lib/cmake NO_DEFAULT_PATH)
+find_package( OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+add_executable(voroni voroni.cpp )
+target_link_libraries( voroni ${OpenCV_LIBS})
