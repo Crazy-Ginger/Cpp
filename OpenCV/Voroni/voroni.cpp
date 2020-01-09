@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
         return 2;
     }
 
-    Mat newImg = Mat(img.cols, img.rows, CV_8UC3, Scalar(0,0,0));
+    Mat newImg = Mat( img.rows, img.cols, CV_8UC3, Scalar(0,0,0));
 
     vector <vector<int>> points = RandPoints(img.rows, img.cols);
     
