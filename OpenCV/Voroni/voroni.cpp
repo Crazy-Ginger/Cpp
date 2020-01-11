@@ -10,14 +10,14 @@
 using namespace std;
 using namespace cv;
 
-vector <vector<int>> RandPoints(int height, int width)
+vector <vector<int>> RandPoints(int height, int width, int nodeCount = 25)
 {
+
     random_device rd;
     default_random_engine rng(rd());
-    uniform_int_distribution <> nodeRange(10, 50);
     uniform_int_distribution <> rowsRange(0, height);
     uniform_int_distribution <> colsRange(0, width);
-    int nodeCount = nodeRange(rng);
+
     vector <vector<int>> points;
     for (int i = 0; i < nodeCount; i++)
     {                         
@@ -27,14 +27,6 @@ vector <vector<int>> RandPoints(int height, int width)
         points.push_back(temp);
     }
     return points;
-}
-
-void SetPixel(vector<int> coords, int x, int y, Mat &newImg, Mat oldImg)
-{
-    for (unsigned int i = 0; i < 4; i++)
-    {
-        newImg.at<Vec3b>(y, x)[i] = oldImg.at<Vec3b>(coords.at(1), coords.at(0))[i];
-    }
 }
 
 double hypot(int x, int y, vector<int> coords)
@@ -47,17 +39,27 @@ double hypot(int x, int y, vector<int> coords)
     return hypSqr;
 }
 
+
+void SetPixel(vector<int> coords, int x, int y, Mat &newImg, Mat oldImg)
+{
+    for (unsigned int i = 0; i < 4; i++)
+    {
+        newImg.at<Vec3b>(y, x)[i] = oldImg.at<Vec3b>(coords.at(1), coords.at(0))[i];
+    }
+}
+
 int main(int argc, char* argv[])
 {
     /*
     argv[0]: program name (e.g. "pixeler")
     argv[1]: the image to be voronied
-    argv[2] (optional): output file name without this the program just displays the image for the viewer
+    argv[2]: number of nodes to use
+    argv[3] (optional): output file name without this the program just displays the image for the viewer
      */
     
-    if (argc < 2)
+    if (argc < 3)
     {
-        cout << "Error not enought arguments:\n1: the image to be voronied\n2 (optional): file name to be saved\n";
+        cout << "Error not enought arguments:\n1: the image to be voronied\n2: the number of nodes to use\n3 (optional): file name to be saved\n";
         return 2;
     }
     
@@ -72,8 +74,7 @@ int main(int argc, char* argv[])
 
     Mat newImg = Mat(img.rows, img.cols, CV_8UC3, Scalar(100, 0, 0));
 
-    vector <vector<int>> points = RandPoints(img.rows, img.cols);
-    int blackCount = 0;
+    vector <vector<int>> points = RandPoints(img.rows, img.cols, atoi(argv[2]));
     for (int x = 0; x < img.cols; x++)
     {
         for (int y = 0; y < img.rows; y++)
@@ -117,9 +118,9 @@ int main(int argc, char* argv[])
         //circle(newImg, Point(tempVec.at(1), tempVec.at(0)), 10, Scalar(0, 255, 0), FILLED, LINE_8);
     //}
 
-    if (argc >= 3)
+    if (argc >= 4)
     {
-        string fileName(argv[2]);
+        string fileName(argv[3]);
         imwrite(fileName, newImg);
     }
     else
