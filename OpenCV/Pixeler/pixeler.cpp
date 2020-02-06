@@ -65,17 +65,17 @@ int getBrightest(Mat img, int widths, int height, int blockW, int blockH, int ch
 int main(int argc, char* argv[])
 {
     /*
-    argv[0]: program name (e.g. "pixeler")
-    argv[1]: the height of pixelating blocks (in pixels)
-    argv[2]: the width of pixelating blocks (in pixels) 
-    argv[3]: whether the image will use the brightest value or average (1 for bright anything else for average)
-    argv[4]: the image to be pixelated
-    argv[5] (optional): output file name without this the program just displays the image for the viewer
+     argv[0]: program call
+     argv[1]: height of pixelling block
+     argv[2]: width of pixelling block
+     argv[3]: brightest pixel or average (1 = brightest)
+     argv[4]: image to be pixelled
+     argv[5]: (optional) ouptut file
      */
 
     if (argc < 5)
     {
-        cout << "Error not enought arguments\n";
+        cout << "Error not enough arguments\n1: the height of the pixelling blocks\n2: the width of the pixelling blocks\n3: use brightest pixel (1) or average (any other value)\n4: path of image to be pixelled\n5: (optional) file path of output, if non-specified the image will just be displayed\n";
         return 2;
     }
     int blockH = stoi(argv[1]);
@@ -122,6 +122,7 @@ int main(int argc, char* argv[])
     }
     else
     {
+        //ensures the window is always placed in the top left corner and the name can be reused later in the program
         char winName[] = "image";
         namedWindow(winName, WINDOW_AUTOSIZE);
         moveWindow(winName, 0, 0);
