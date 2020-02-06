@@ -16,7 +16,6 @@ void print(int list[], int length)
 int main()
 {
 	int length = 0;
-	char release;
 	cout << "How many numbers: ";
 	cin >> length;
 	cout << endl;
@@ -94,6 +93,5 @@ int main()
 		
 	} while (!last); //ensures the do keeps going and only check at the end if it's the last permutation
 	cout << endl << "Count: " << count-1 << endl;
-	cin >> release;
 	return 0;
 }
