@@ -14,6 +14,7 @@
 
 #Ignores Testing and make files
 Testing.cpp
+test.cpp
 CMakeFiles
 CMakeCache.txt
 CMakeScripts

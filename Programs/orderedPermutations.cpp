@@ -1,11 +1,8 @@
 #include <iostream>
 using namespace std;
 
-
-//prints the current permutation of the array in an easy to read manner
 void print(int list[], int length)
 {
-	//cout << "Current permutation: ";
 	for (int i = 0; i < length; i++)
 	{
 		cout << list[i] << "\t" ;
@@ -13,32 +10,23 @@ void print(int list[], int length)
 	cout << "\n";
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-	int length = 0;
-	cout << "How many numbers: ";
-	cin >> length;
-	cout << endl;
+	int length = stoi(argv[1]);
 	int list[length];
 
 	//fills the array defined above
 	for (int i = 0; i < length; i++)
 	{
 		list[i] = i;
-		//cout << "i: " << i << "\tlist[" << i << "]: " << list[i] << endl;
 	}
 
 	//last minute variable declarations mainly for swapping the values in the array around and for counting the number of permutations
 	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
 	bool last = false;
 
-
 	//prints the first instance of the array
-	//cout << "Count: " << count << endl;
 	print(list, length);
-	//cin >> release;
-
-	
 
 	do
 	{
@@ -92,6 +80,6 @@ int main()
 		}
 		
 	} while (!last); //ensures the do keeps going and only check at the end if it's the last permutation
-	cout << endl << "Count: " << count-1 << endl;
+	cout << "Permutations: " << count << endl;
 	return 0;
 }
