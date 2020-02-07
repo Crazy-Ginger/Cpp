@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <algorithm>
 using namespace std;
 
 void print(int ints[])
@@ -12,6 +13,7 @@ void print(int ints[])
     cout << "\n";
 }
 
+
 int main(int argc, char* argv[])
 {
     clock_t sClock, eClock;
@@ -19,7 +21,6 @@ int main(int argc, char* argv[])
     for (int i = 1; i <= (sizeof(ints)/sizeof(*ints)); i++)
     {
         ints[i] = i;
-        cout << ints[i] << endl;
     }
 
     bool ext = false;
@@ -36,7 +37,20 @@ int main(int argc, char* argv[])
                 edge = i-1;
             }
         }
+        int rearrange = ext + 1;
 
+        for (int i = stoi(argv[1])-1; i > rearrange; i--)
+        {
+            int swapper = ints[i];
+            ints[i] = ints[rearrange];
+            ints[rearrange] = swapper;
+            rearrange ++;
+        }
+        int swapper = ints[ext];
+        ints[ext] = ints[ext+1];
+        ints[ext] = swapper;
+
+        print(ints);
     }
     eClock = clock();
     double tickDiff = (float)eClock - (float)sClock;
