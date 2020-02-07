@@ -26,8 +26,7 @@ int main(int argc, char* argv[])
 	bool last = false;
 
 	//prints the first instance of the array
-	print(list, length);
-
+	//print(list, length);
 	do
 	{
 		count++;
@@ -75,7 +74,7 @@ int main(int argc, char* argv[])
 		if (!last)
 		{
 			//cout << "Count: " << count << endl;
-			print(list, length);
+            //print(list, length);
 			//cin >> release;
 		}
 		
