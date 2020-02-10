@@ -15,7 +15,9 @@ int main(int argc, char* argv[])
     VideoCapture cap;
     int deviceID = 0;
     int apiID = cv::CAP_ANY;
+
     cap.open(deviceID + apiID);
+    cout << "Opened capture device\n";
     string choice = argv[1];
 
     if (!cap.isOpened())
@@ -23,7 +25,6 @@ int main(int argc, char* argv[])
         cout << "Error no luck reading\n";
         return 2;
     }
-
     while(true)
     {
         cap.read(frame); 
