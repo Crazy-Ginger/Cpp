@@ -22,8 +22,9 @@ int main(int argc, char* argv[])
     if (!cap.isOpened())
     {
         cout << "Error no luck reading\n";
-        return 2;
+        return -1;
     }
+
     while(true)
     {
         cap.read(frame); 
