@@ -17,7 +17,6 @@ int main(int argc, char* argv[])
     int apiID = cv::CAP_ANY;
 
     cap.open(deviceID + apiID);
-    cout << "Opened capture device\n";
     string choice = argv[1];
 
     if (!cap.isOpened())
