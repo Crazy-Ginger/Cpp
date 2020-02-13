@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
             if (choice == "cannied" || choice == "ca")
             {
                 blur(cFrame, cFrame, Size(2,2));
-                Canny(cFrame, cFrame, 100, 300, 5);
+                Canny(cFrame, cFrame, 200, 300, 5);
             }
             imshow(windowName, cFrame);
         }
