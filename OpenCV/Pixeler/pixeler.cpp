@@ -9,7 +9,7 @@ using namespace std;
 using namespace cv;
 
 
-void setBlock(int value, int startW, int startH, int blockW, int blockH, int channel, Mat &img)
+void setBlock(int value, int startW, int startH, int blockW, int blockH, int channel, Mat &img, float increase = 1.0)
 {
     for (int w = 0; w < blockW; w++)
     {
@@ -23,7 +23,7 @@ void setBlock(int value, int startW, int startH, int blockW, int blockH, int cha
             {
                 value = 0;
             }
-            img.at<Vec3b>(startH+h, startW+w)[channel] = value;
+            img.at<Vec3b>(startH+h, startW+w)[channel] = value*increase;
         }
     }
 }
