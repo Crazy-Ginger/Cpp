@@ -20,7 +20,6 @@ unsigned int factorial(int numb)
 //allows for the permutations to be recommbined using the pointers
 void appender(string word, vector<int> &pointers)
 {
-
 	string newOrder = "";
 	for (unsigned int i = 0; i < pointers.size(); i++)
 	{
@@ -44,8 +43,6 @@ void Permuter(string word)
     //variable declarations mainly for swapping the values in the array around and for counting the number of permutations
 	unsigned int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
 	
-	
-	//cout << "Count: " << count << "\t";
 	appender(word, pointers);
 
 	while (count < factorial(length))
@@ -75,9 +72,10 @@ void Permuter(string word)
 			rearrange++;
 			asc_swapper--;
 		}
-		rearrange = length - 1;
+		
 
 		//selects the numbers the need to be swapped
+        rearrange = length - 1;
 		while (pointers.at(rearrange) > pointers.at(initial_comp))
 		{
 			rearrange--;
@@ -89,18 +87,11 @@ void Permuter(string word)
 		pointers.at(initial_comp) = pointers.at(rearrange);
 		pointers.at(rearrange) = swapper;
 
-		//cout << "Count: " << count << endl;
-		//print(list,length);
-		//cout << endl;
-
-		//cout << "Count: " << count << "\t";
-
 		appender(word, pointers);
         count++;
 
-	}  //ensures the do keeps going and only check at the end if it's the last permutation
+	}
     cout << "Final count: " << count << endl;
-	//cout << "\nPermuted!" << endl;
 }
 
 
@@ -121,5 +112,5 @@ int main(int argc, char* argv[])
     
     cout << "Clock cout: " << tickDiff << "\tTime: " << clockDiff <<endl;
 	//cin >> release;
-	return 0;
+	return 1;
 }
