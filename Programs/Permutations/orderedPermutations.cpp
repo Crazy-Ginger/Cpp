@@ -25,16 +25,14 @@ int main(int argc, char* argv[])
 	int swapper = 0, initial_comp = 0, rearrange = 0, asc_swapper = 0, count = 1;
 	bool last = false;
 
-	//prints the first instance of the array
-	//print(list, length);
 	do
 	{
 		count++;
+        print(list, length);
 		last = true;
 		initial_comp = length - 2;
 		for (initial_comp; initial_comp >= 0; initial_comp--)
 		{
-			//cout << "list[initial_comp]" << list[initial_comp] << endl;
 			if (list[initial_comp] < list[initial_comp + 1])
 			{
 				last = false;
@@ -67,18 +65,17 @@ int main(int argc, char* argv[])
 		list[rearrange] = swapper;
 
 		//cout << "Count: " << count << endl;
-		//print(list,length);
+        //print(list,length);
 		//cout << endl;
 
 		
-		if (!last)
-		{
-			//cout << "Count: " << count << endl;
-            //print(list, length);
-			//cin >> release;
-		}
+		//if (!last)
+		//{
+			////cout << "Count: " << count << endl;
+			////cin >> release;
+		//}
 		
 	} while (!last); //ensures the do keeps going and only check at the end if it's the last permutation
-	cout << "Permutations: " << count << endl;
+	cout << "Permutations: " << count-1 << endl;
 	return 0;
 }
