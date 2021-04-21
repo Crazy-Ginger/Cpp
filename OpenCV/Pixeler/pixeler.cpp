@@ -8,7 +8,6 @@
 using namespace std;
 using namespace cv;
 
-
 void setBlock(int value, int startW, int startH, int blockW, int blockH, int channel, Mat &img, float increase = 1.0)
 {
     for (int w = 0; w < blockW; w++)
@@ -23,7 +22,7 @@ void setBlock(int value, int startW, int startH, int blockW, int blockH, int cha
             {
                 value = 0;
             }
-            img.at<Vec3b>(startH+h, startW+w)[channel] = value*increase;
+            img.at<Vec3b>(startH + h, startW + w)[channel] = value * increase;
         }
     }
 }
@@ -33,9 +32,9 @@ int getAverage(Mat img, int widths, int height, int blockW, int blockH, int chan
     int total = 0;
     for (int x = 0; x < blockW; x++)
     {
-        for (int y =0;y < blockH; y++)
+        for (int y = 0; y < blockH; y++)
         {
-            total += img.at<Vec3b>(height+y, widths+x)[channel];
+            total += img.at<Vec3b>(height + y, widths + x)[channel];
         }
     }
     int area = blockH * blockW;
@@ -48,10 +47,10 @@ int getBrightest(Mat img, int widths, int height, int blockW, int blockH, int ch
     int brightest = 0;
     for (int x = 0; x < blockW; x++)
     {
-        for (int y =0;y < blockH; y++)
+        for (int y = 0; y < blockH; y++)
         {
 
-            int current = img.at<Vec3b>(height+y, widths+x)[channel];
+            int current = img.at<Vec3b>(height + y, widths + x)[channel];
             if (current > brightest)
             {
                 brightest = current;
@@ -61,8 +60,7 @@ int getBrightest(Mat img, int widths, int height, int blockW, int blockH, int ch
     return brightest;
 }
 
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     /*
      argv[0]: program call
@@ -80,36 +78,40 @@ int main(int argc, char* argv[])
     }
     int blockH = stoi(argv[1]);
     int blockW = stoi(argv[2]);
-    
+
     Mat img;
     img = imread(argv[4], IMREAD_COLOR);
-    
+
     if (!img.data)
     {
         cout << "Error couldn't read the file\n";
         return 2;
     }
 
-    int height = (img.rows/blockH)*blockH;
-    int widths = (img.cols/blockW)*blockW;
+    int height = (img.rows / blockH) * blockH;
+    int widths = (img.cols / blockW) * blockW;
 
-    Mat newImg = Mat(height, widths, CV_8UC3, Scalar(0,0,0));
+    Mat newImg = Mat(height, widths, CV_8UC3, Scalar(0, 0, 0));
 
-    for(int x = 0; x < widths - blockW; x+= blockW)
+    // TODO: write without double for loop
+    // parallise using #pragma omp parallel for
+    for (int x = 0; x < widths - blockW; x += blockW)
     {
-        for (int y = 0; y < height - blockH; y+= blockH)
+        for (int y = 0; y < height - blockH; y += blockH)
         {
-            for (int k = 0; k < 3; k++)
+            // cycle through all channels
+            // TODO: find a way to do this without loop or parallise with #pragma omp parallel for
+            for (int c = 0; c < 3; c++)
             {
-              if (stoi(argv[3]) == 1)
-              {
-                    setBlock(getBrightest(img, x, y, blockW, blockH, k), x, y, blockW, blockH, k, newImg);
-              }
-              else
-              {
-                //gets the average of the pixel block and then sets all the pixels in that block to that value
-                    setBlock(getAverage(img, x, y, blockW, blockH, k), x, y, blockW, blockH, k, newImg);
-              }
+                if (stoi(argv[3]) == 1)
+                {
+                    setBlock(getBrightest(img, x, y, blockW, blockH, c), x, y, blockW, blockH, c, newImg);
+                }
+                else
+                {
+                    //gets the average of the pixel block and then sets all the pixels in that block to that value
+                    setBlock(getAverage(img, x, y, blockW, blockH, c), x, y, blockW, blockH, c, newImg);
+                }
             }
         }
     }
