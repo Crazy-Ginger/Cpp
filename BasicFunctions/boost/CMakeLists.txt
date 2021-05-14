@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.20)
+project(boosttest)
+find_package( Boost REQUIRED COMPONENTS program_options)
+include_directories(${Boost_INCLUDE_DIRS})
+add_executable(boosttest boosttest.cpp)
+target_link_libraries(${PROJECT_NAME} Boost::program_options)
